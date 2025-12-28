@@ -205,7 +205,6 @@ export function EnsoAIDemoPreview() {
   const [activeTab, setActiveTab] = useState('agent');
 
   const worktrees = worktreesData[selectedRepo] || [];
-  const currentRepo = repositories.find(r => r.name === selectedRepo);
   const currentSession = sessions.find(s => s.id === activeSession);
   const workspacePath = `~/ensoai/workspaces/${selectedRepo}/${activeWorktree}`;
 
@@ -699,7 +698,7 @@ export function EnsoAIDemoPreview() {
                           <ChevronDown className="w-3 h-3" />
                           <span>Staged Changes</span>
                           <span className="ml-auto text-ayu-fg/40">{gitChanges.staged.length}</span>
-                          <Sparkles className="w-3 h-3 text-ayu-accent opacity-0 group-hover:opacity-100 cursor-pointer" title="AI Review" />
+                          <span title="AI Review"><Sparkles className="w-3 h-3 text-ayu-accent opacity-0 group-hover:opacity-100 cursor-pointer" /></span>
                         </div>
                         {gitChanges.staged.map((file, i) => (
                           <div key={i} className={`flex items-center gap-2 px-5 py-1 text-xs hover:bg-ayu-line/30 cursor-pointer ${i === 0 ? 'bg-ayu-accent/10' : ''}`}>
