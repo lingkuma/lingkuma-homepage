@@ -76,14 +76,13 @@ export function Features() {
 							<button
 								key={index}
 								onClick={() => setActiveFeature(index)}
-								className={clsx(
-									"text-left p-6 rounded-2xl transition-all duration-300 border group relative overflow-hidden",
-									activeFeature === index
-										? "bg-white border-ayu-line shadow-lg scale-[1.02]"
-										: "bg-transparent border-transparent hover:bg-white/50 hover:border-ayu-line/50 opacity-60 hover:opacity-100",
-								)}
-							>
-								{activeFeature === index && (
+																	className={clsx(
+																		"text-left p-6 rounded-2xl transition-all duration-300 border group relative overflow-hidden",
+																		activeFeature === index
+																			? "bg-ayu-panel border-ayu-line shadow-lg scale-[1.02]"
+																			: "bg-transparent border-transparent hover:bg-ayu-panel/50 hover:border-ayu-line/50 opacity-60 hover:opacity-100",
+																	)}
+																>								{activeFeature === index && (
 									<motion.div
 										layoutId="active-glow"
 										className="absolute inset-0 bg-gradient-to-r from-ayu-accent/5 to-transparent opacity-50"
@@ -122,11 +121,11 @@ export function Features() {
 
 					{/* Right Side: Image Preview */}
 					<div className="w-full lg:w-2/3 lg:sticky lg:top-24 h-fit">
-						<div className="relative rounded-3xl border border-ayu-line bg-white shadow-2xl overflow-hidden perspective-1000">
+						<div className="relative rounded-3xl border border-ayu-line bg-ayu-panel shadow-2xl overflow-hidden perspective-1000">
 							<div className="absolute inset-0 bg-ayu-bg/50"></div>
 
 							{/* Window Controls Decoration */}
-							<div className="relative h-10 bg-white border-b border-ayu-line z-20 flex items-center px-4 gap-2">
+							<div className="relative h-10 bg-ayu-panel border-b border-ayu-line z-20 flex items-center px-4 gap-2">
 								<div className="w-3 h-3 rounded-full bg-red-400"></div>
 								<div className="w-3 h-3 rounded-full bg-yellow-400"></div>
 								<div className="w-3 h-3 rounded-full bg-green-400"></div>

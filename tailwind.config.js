@@ -33,42 +33,42 @@ export default {
       colors: {
         // Corrected Ayu Light Palette
         ayu: {
-          bg: '#f8f9fa',        // background
-          fg: '#5c6166',        // foreground
-          cursor: '#ffaa33',    // cursor-color
-          'cursor-text': '#f8f9fa', // cursor-text
+          bg: 'var(--ayu-bg)',
+          fg: 'var(--ayu-fg)',
+          cursor: 'var(--ayu-cursor)',
+          'cursor-text': 'var(--ayu-cursor-text)',
           
           // Switch primary accent to Blue (Palette 12) for better UI balance
-          accent: '#399ee6',    
+          accent: 'var(--ayu-accent)',
           
           // Secondary/Highlight accent (Orange from cursor/keywords)
-          highlight: '#ffaa33', 
+          highlight: 'var(--ayu-highlight)',
 
           // Ansi Colors Mapped for semantic usage
-          black: '#000000',
-          red: '#ea6c6d',       // Error/Delete
-          green: '#6cbf43',     // Success/String
-          yellow: '#eca944',    // Warning/Function
-          blue: '#399ee6',      // Info/Entity
-          purple: '#a37acc',    // Constant
-          cyan: '#4cbf99',      // Regexp
-          white: '#ffffff',
+          black: 'var(--ayu-black)',
+          red: 'var(--ayu-red)',
+          green: 'var(--ayu-green)',
+          yellow: 'var(--ayu-yellow)',
+          blue: 'var(--ayu-blue)',
+          purple: 'var(--ayu-purple)',
+          cyan: 'var(--ayu-cyan)',
+          white: 'var(--ayu-white)',
           
           // Mapped semantic names
-          tag: '#399ee6',       // Blue
-          func: '#eca944',      // Yellow
-          entity: '#399ee6',    // Blue
-          string: '#86b300',    // Bright Green
-          regexp: '#4cbf99',    // Cyan
-          constant: '#a37acc',  // Purple
-          keyword: '#ffaa33',   // Orange
-          comment: '#bababa',   // Gray
+          tag: 'var(--ayu-tag)',
+          func: 'var(--ayu-func)',
+          entity: 'var(--ayu-entity)',
+          string: 'var(--ayu-string)',
+          regexp: 'var(--ayu-regexp)',
+          constant: 'var(--ayu-constant)',
+          keyword: 'var(--ayu-keyword)',
+          comment: 'var(--ayu-comment)',
           
-          line: '#f0f0f0',      // Subtle line/border
-          panel: '#ffffff',     // Panel/Card background
+          line: 'var(--ayu-line)',
+          panel: 'var(--ayu-panel)',
           
-          selection: '#035bd6', // selection-background
-          'selection-text': '#f8f9fa', // selection-foreground
+          selection: 'var(--ayu-selection)',
+          'selection-text': 'var(--ayu-selection-text)',
         }
       },
       boxShadow: {
@@ -80,7 +80,7 @@ export default {
         'slide-up': 'slideUp 0.5s ease-out',
       },
       backgroundImage: {
-        'grid-pattern': "linear-gradient(to right, #f0f0f0 1px, transparent 1px), linear-gradient(to bottom, #f0f0f0 1px, transparent 1px)",
+        'grid-pattern': "linear-gradient(to right, var(--ayu-line) 1px, transparent 1px), linear-gradient(to bottom, var(--ayu-line) 1px, transparent 1px)",
       },
       keyframes: {
         fadeIn: {

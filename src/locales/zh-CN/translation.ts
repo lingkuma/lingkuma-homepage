@@ -53,7 +53,8 @@ export default {
     },
     themes: {
       title: "延续你的美学。",
-      desc: "EnsoAI 尊重你的品味。内置多种 Ghostty 主题，支持自定义字体，并在所有 Worktree 间同步你的视觉风格。"
+      desc: "EnsoAI 尊重你的品味。内置多种 Ghostty 主题，支持自定义字体，并在所有 Worktree 间同步你的视觉风格。",
+      more: "以及 400+ 更多 Ghostty 主题..."
     },
     footer: {
       tagline: "Git Worktree 管理器 + AI 编程助手。",

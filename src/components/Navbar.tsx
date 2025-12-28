@@ -10,7 +10,7 @@ export function Navbar() {
   const { t } = useTranslation();
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-ayu-line">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-ayu-bg/90 backdrop-blur-md border-b border-ayu-line">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center gap-2">
@@ -51,7 +51,7 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t border-ayu-line bg-white"
+            className="md:hidden border-t border-ayu-line bg-ayu-bg"
           >
             <div className="px-4 py-4 flex flex-col gap-4">
               <div className="pt-2 flex flex-col gap-2">

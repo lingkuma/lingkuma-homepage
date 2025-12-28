@@ -8,7 +8,7 @@ export function Hero() {
 
   return (
     <section className="relative pt-40 pb-32 overflow-hidden bg-grid-pattern [background-size:24px_24px]">
-      <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/50 to-white/80 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-ayu-bg/80 via-ayu-bg/50 to-ayu-bg/80 pointer-events-none"></div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-4xl mx-auto">
@@ -16,7 +16,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-ayu-line shadow-sm text-sm font-medium text-ayu-fg/80 mb-8 hover:border-ayu-accent/50 transition-colors cursor-default"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-ayu-panel border border-ayu-line shadow-sm text-sm font-medium text-ayu-fg/80 mb-8 hover:border-ayu-accent/50 transition-colors cursor-default"
           >
             <span className="w-2 h-2 rounded-full bg-ayu-accent"></span>
             {t('hero.badge')}
@@ -63,7 +63,7 @@ export function Hero() {
             <Button 
               variant="outline" 
               size="lg" 
-              className="rounded-full px-8 h-14 text-base font-semibold bg-white hover:bg-gray-50 hover:-translate-y-0.5 transition-all"
+              className="rounded-full px-8 h-14 text-base font-semibold bg-ayu-panel hover:bg-ayu-line/50 hover:-translate-y-0.5 transition-all"
               onClick={() => window.open('https://github.com/j3n5en/EnsoAI', '_blank')}
             >
               {t('hero.cta.manifest')}
