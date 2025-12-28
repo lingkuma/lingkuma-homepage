@@ -132,17 +132,17 @@ export function Features() {
 								<div className="w-3 h-3 rounded-full bg-green-400"></div>
 							</div>
 
-							<div className="relative bg-ayu-bg/10 flex items-start justify-center">
-								<AnimatePresence mode="wait">
+							<div className="relative bg-ayu-bg/10 aspect-[16/10]">
+								<AnimatePresence initial={false}>
 									<motion.img
 										key={activeFeature}
 										src={features[activeFeature].image}
 										alt={features[activeFeature].title}
-										initial={{ opacity: 0, y: 10, scale: 0.99 }}
-										animate={{ opacity: 1, y: 0, scale: 1 }}
-										exit={{ opacity: 0, position: "absolute", zIndex: -1 }} // Absolute exit to prevent layout jump
-										transition={{ duration: 0.3, ease: "easeOut" }}
-										className="w-full h-auto object-top rounded-b-xl border border-ayu-line/30 shadow-sm relative z-10"
+										initial={{ opacity: 0 }}
+										animate={{ opacity: 1 }}
+										exit={{ opacity: 0 }}
+										transition={{ duration: 0.4, ease: "easeInOut" }}
+										className="w-full h-full object-cover object-top rounded-b-xl border border-ayu-line/30 shadow-sm absolute inset-0"
 									/>
 								</AnimatePresence>
 							</div>
