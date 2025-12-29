@@ -1073,30 +1073,77 @@ export function EnsoAIDemoPreview() {
   const [activeSession, setActiveSession] = useState('claude');
   const [activeTab, setActiveTab] = useState('agent');
   const [playedAnimations, setPlayedAnimations] = useState<Set<string>>(new Set());
-  const [selectedFile, setSelectedFile] = useState('src/components/Sidebar.tsx');
-  const [openTabs, setOpenTabs] = useState<string[]>(['src/components/Sidebar.tsx']);
-  const [selectedGitFile, setSelectedGitFile] = useState('src/components/Button.tsx');
+
+  // Editor state per worktree: { [worktreeKey]: { selectedFile, openTabs, selectedGitFile } }
+  const [editorStates, setEditorStates] = useState<Record<string, {
+    selectedFile: string;
+    openTabs: string[];
+    selectedGitFile: string;
+  }>>({});
+
+  // Get current worktree key
+  const worktreeKey = `${selectedRepo}:${activeWorktree}`;
+
+  // Get current editor state with defaults
+  const currentEditorState = editorStates[worktreeKey] || {
+    selectedFile: 'src/components/Sidebar.tsx',
+    openTabs: ['src/components/Sidebar.tsx'],
+    selectedGitFile: 'src/components/Button.tsx',
+  };
+
+  const { selectedFile, openTabs, selectedGitFile } = currentEditorState;
+
+  // Update editor state for current worktree
+  const updateEditorState = useCallback((updates: Partial<typeof currentEditorState>) => {
+    setEditorStates(prev => ({
+      ...prev,
+      [worktreeKey]: {
+        ...(prev[worktreeKey] || {
+          selectedFile: 'src/components/Sidebar.tsx',
+          openTabs: ['src/components/Sidebar.tsx'],
+          selectedGitFile: 'src/components/Button.tsx',
+        }),
+        ...updates,
+      },
+    }));
+  }, [worktreeKey]);
 
   // Handle opening a file - add to tabs if not already open
   const handleOpenFile = useCallback((filePath: string) => {
-    setSelectedFile(filePath);
-    setOpenTabs(prev => prev.includes(filePath) ? prev : [...prev, filePath]);
-  }, []);
+    updateEditorState({
+      selectedFile: filePath,
+      openTabs: openTabs.includes(filePath) ? openTabs : [...openTabs, filePath],
+    });
+  }, [updateEditorState, openTabs]);
 
   // Handle closing a tab
   const handleCloseTab = useCallback((filePath: string, e: React.MouseEvent) => {
     e.stopPropagation();
-    setOpenTabs(prev => {
-      const newTabs = prev.filter(t => t !== filePath);
-      // If closing the selected tab, select another tab
-      if (filePath === selectedFile && newTabs.length > 0) {
-        const closedIndex = prev.indexOf(filePath);
-        const newSelectedIndex = Math.min(closedIndex, newTabs.length - 1);
-        setSelectedFile(newTabs[newSelectedIndex]);
-      }
-      return newTabs;
+    const newTabs = openTabs.filter(t => t !== filePath);
+    let newSelectedFile = selectedFile;
+
+    // If closing the selected tab, select another tab
+    if (filePath === selectedFile && newTabs.length > 0) {
+      const closedIndex = openTabs.indexOf(filePath);
+      const newSelectedIndex = Math.min(closedIndex, newTabs.length - 1);
+      newSelectedFile = newTabs[newSelectedIndex];
+    }
+
+    updateEditorState({
+      selectedFile: newSelectedFile,
+      openTabs: newTabs,
     });
-  }, [selectedFile]);
+  }, [selectedFile, openTabs, updateEditorState]);
+
+  // Handle selecting a file (for tabs click)
+  const handleSelectFile = useCallback((filePath: string) => {
+    updateEditorState({ selectedFile: filePath });
+  }, [updateEditorState]);
+
+  // Handle selecting a git file
+  const handleSelectGitFile = useCallback((filePath: string) => {
+    updateEditorState({ selectedGitFile: filePath });
+  }, [updateEditorState]);
 
   const worktrees = worktreesData[selectedRepo] || [];
   const currentSession = sessions.find(s => s.id === activeSession);
@@ -1362,7 +1409,7 @@ export function EnsoAIDemoPreview() {
                     {openTabs.map((tab) => (
                       <div
                         key={tab}
-                        onClick={() => setSelectedFile(tab)}
+                        onClick={() => handleSelectFile(tab)}
                         className={`flex items-center gap-2 px-3 py-1 rounded border text-xs cursor-pointer shrink-0 ${
                           tab === selectedFile
                             ? 'bg-ayu-bg border-ayu-line'
@@ -1483,7 +1530,7 @@ export function EnsoAIDemoPreview() {
                         {gitChanges.staged.map((file) => (
                           <div
                             key={file.name}
-                            onClick={() => setSelectedGitFile(file.name)}
+                            onClick={() => handleSelectGitFile(file.name)}
                             className={`flex items-center gap-2 px-5 py-1 text-xs hover:bg-ayu-line/30 cursor-pointer ${selectedGitFile === file.name ? 'bg-ayu-accent/10' : ''}`}
                           >
                             <span className={`w-4 text-center font-mono ${file.status === 'M' ? 'text-ayu-yellow' : 'text-ayu-green'}`}>
@@ -1505,7 +1552,7 @@ export function EnsoAIDemoPreview() {
                         {gitChanges.unstaged.map((file) => (
                           <div
                             key={file.name}
-                            onClick={() => setSelectedGitFile(file.name)}
+                            onClick={() => handleSelectGitFile(file.name)}
                             className={`flex items-center gap-2 px-5 py-1 text-xs hover:bg-ayu-line/30 cursor-pointer ${selectedGitFile === file.name ? 'bg-ayu-accent/10' : ''}`}
                           >
                             <span className="w-4 text-center text-ayu-yellow font-mono">{file.status}</span>
@@ -1525,7 +1572,7 @@ export function EnsoAIDemoPreview() {
                         {gitChanges.untracked.map((file) => (
                           <div
                             key={file.name}
-                            onClick={() => setSelectedGitFile(file.name)}
+                            onClick={() => handleSelectGitFile(file.name)}
                             className={`flex items-center gap-2 px-5 py-1 text-xs hover:bg-ayu-line/30 cursor-pointer ${selectedGitFile === file.name ? 'bg-ayu-accent/10' : ''}`}
                           >
                             <span className="w-4 text-center text-ayu-green font-mono">U</span>
