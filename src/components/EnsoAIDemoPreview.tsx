@@ -193,12 +193,6 @@ const tabsConfig = [
   { icon: GitCompare, key: 'sourceControl', active: false },
 ];
 
-const sessions = [
-  { id: 'claude', name: 'Claude', model: 'Opus 4.5', color: 'text-ayu-accent' },
-  { id: 'codex', name: 'Codex', model: 'gpt-5.2-codex', color: 'text-ayu-green' },
-  { id: 'gemini', name: 'Gemini', model: 'Gemini 3', color: 'text-ayu-purple' },
-];
-
 // Mock file tree data
 const fileTreeData = [
   {
@@ -1070,9 +1064,16 @@ export function EnsoAIDemoPreview() {
   const { t } = useTranslation();
   const [selectedRepo, setSelectedRepo] = useState('awesome-app');
   const [activeWorktree, setActiveWorktree] = useState('main');
-  const [activeSession, setActiveSession] = useState('claude');
   const [activeTab, setActiveTab] = useState('agent');
   const [playedAnimations, setPlayedAnimations] = useState<Set<string>>(new Set());
+  const [showSessionDropdown, setShowSessionDropdown] = useState(false);
+
+  // Session state per worktree
+  type SessionItem = { id: string; type: 'claude' | 'codex' | 'gemini'; name: string };
+  const [sessionStates, setSessionStates] = useState<Record<string, {
+    sessions: SessionItem[];
+    activeSessionId: string;
+  }>>({});
 
   // Editor state per worktree: { [worktreeKey]: { selectedFile, openTabs, selectedGitFile } }
   const [editorStates, setEditorStates] = useState<Record<string, {
@@ -1145,8 +1146,83 @@ export function EnsoAIDemoPreview() {
     updateEditorState({ selectedGitFile: filePath });
   }, [updateEditorState]);
 
+  // Default sessions for new worktrees
+  const defaultSessions: SessionItem[] = [
+    { id: 'claude-1', type: 'claude', name: 'Claude' },
+  ];
+
+  // Get current session state with defaults
+  const currentSessionState = sessionStates[worktreeKey] || {
+    sessions: defaultSessions,
+    activeSessionId: 'claude-1',
+  };
+
+  const { sessions: worktreeSessions, activeSessionId } = currentSessionState;
+
+  // Get active session info
+  const activeSessionInfo = worktreeSessions.find(s => s.id === activeSessionId);
+
+  // Session type configs for display
+  const sessionTypeConfigs = {
+    claude: { name: 'Claude', model: 'Opus 4.5', color: 'text-ayu-accent' },
+    codex: { name: 'Codex', model: 'gpt-5.2-codex', color: 'text-ayu-green' },
+    gemini: { name: 'Gemini', model: 'Gemini 3', color: 'text-ayu-purple' },
+  };
+
+  // Update session state for current worktree
+  const updateSessionState = useCallback((updates: Partial<typeof currentSessionState>) => {
+    setSessionStates(prev => ({
+      ...prev,
+      [worktreeKey]: {
+        ...(prev[worktreeKey] || {
+          sessions: defaultSessions,
+          activeSessionId: 'claude-1',
+        }),
+        ...updates,
+      },
+    }));
+  }, [worktreeKey]);
+
+  // Create new session
+  const handleCreateSession = useCallback((type: 'claude' | 'codex' | 'gemini') => {
+    const typeCount = worktreeSessions.filter(s => s.type === type).length + 1;
+    const newSession: SessionItem = {
+      id: `${type}-${Date.now()}`,
+      type,
+      name: `${sessionTypeConfigs[type].name}${typeCount > 1 ? ` ${typeCount}` : ''}`,
+    };
+    updateSessionState({
+      sessions: [...worktreeSessions, newSession],
+      activeSessionId: newSession.id,
+    });
+    setShowSessionDropdown(false);
+  }, [worktreeSessions, updateSessionState]);
+
+  // Close session
+  const handleCloseSession = useCallback((sessionId: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    const newSessions = worktreeSessions.filter(s => s.id !== sessionId);
+    if (newSessions.length === 0) return; // Don't close the last session
+
+    let newActiveId = activeSessionId;
+    if (sessionId === activeSessionId) {
+      const closedIndex = worktreeSessions.findIndex(s => s.id === sessionId);
+      const newIndex = Math.min(closedIndex, newSessions.length - 1);
+      newActiveId = newSessions[newIndex].id;
+    }
+
+    updateSessionState({
+      sessions: newSessions,
+      activeSessionId: newActiveId,
+    });
+  }, [worktreeSessions, activeSessionId, updateSessionState]);
+
+  // Select session
+  const handleSelectSession = useCallback((sessionId: string) => {
+    updateSessionState({ activeSessionId: sessionId });
+  }, [updateSessionState]);
+
   const worktrees = worktreesData[selectedRepo] || [];
-  const currentSession = sessions.find(s => s.id === activeSession);
   const workspacePath = `~/ensoai/workspaces/${selectedRepo}/${activeWorktree}`;
 
   // Unique key for each worktree+session combination
@@ -1337,59 +1413,88 @@ export function EnsoAIDemoPreview() {
             {/* Session Tab - Only for Agent tab */}
             {activeTab === 'agent' && (
               <div className="flex items-center gap-1 px-2 py-1.5 border-b border-ayu-line bg-ayu-panel/50">
-                {sessions.map((session) => (
-                  <div
-                    key={session.id}
-                    onClick={() => setActiveSession(session.id)}
-                    className={`flex items-center gap-2 px-3 py-1 rounded border text-xs cursor-pointer transition-all ${
-                      activeSession === session.id
-                        ? 'bg-ayu-bg border-ayu-line'
-                        : 'bg-transparent border-transparent hover:bg-ayu-line/30'
-                    }`}
+                {worktreeSessions.map((session) => {
+                  const config = sessionTypeConfigs[session.type];
+                  const isActive = activeSessionId === session.id;
+                  return (
+                    <div
+                      key={session.id}
+                      onClick={() => handleSelectSession(session.id)}
+                      className={`flex items-center gap-2 px-3 py-1 rounded border text-xs cursor-pointer transition-all ${
+                        isActive
+                          ? 'bg-ayu-bg border-ayu-line'
+                          : 'bg-transparent border-transparent hover:bg-ayu-line/30'
+                      }`}
+                    >
+                      <span className={`font-medium ${isActive ? config.color : 'text-ayu-fg/50'}`}>
+                        {session.name}
+                      </span>
+                      {isActive && worktreeSessions.length > 1 && (
+                        <X
+                          className="w-3 h-3 text-ayu-fg/40 hover:text-ayu-fg"
+                          onClick={(e) => handleCloseSession(session.id, e)}
+                        />
+                      )}
+                    </div>
+                  );
+                })}
+                <div className="relative">
+                  <button
+                    onClick={() => setShowSessionDropdown(!showSessionDropdown)}
+                    className="p-1 rounded hover:bg-ayu-line/50 text-ayu-fg/40 hover:text-ayu-fg"
                   >
-                    <span className={`font-medium ${activeSession === session.id ? session.color : 'text-ayu-fg/50'}`}>
-                      {session.name}
-                    </span>
-                    {activeSession === session.id && (
-                      <X className="w-3 h-3 text-ayu-fg/40 hover:text-ayu-fg" />
-                    )}
-                  </div>
-                ))}
-                <button className="p-1 rounded hover:bg-ayu-line/50 text-ayu-fg/40 hover:text-ayu-fg">
-                  <Plus className="w-4 h-4" />
-                </button>
+                    <Plus className="w-4 h-4" />
+                  </button>
+                  {showSessionDropdown && (
+                    <div className="absolute top-full left-0 mt-1 bg-ayu-panel border border-ayu-line rounded-lg shadow-xl z-50 py-1">
+                      {(['claude', 'codex', 'gemini'] as const).map((type) => {
+                        const config = sessionTypeConfigs[type];
+                        return (
+                          <button
+                            key={type}
+                            onClick={() => handleCreateSession(type)}
+                            className="w-full px-3 py-1.5 text-left text-xs hover:bg-ayu-line/50 flex items-center gap-3 whitespace-nowrap"
+                          >
+                            <span className={`font-medium ${config.color} w-14`}>{config.name}</span>
+                            <span className="text-ayu-fg/40">{config.model}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
               </div>
             )}
 
             {/* Tab Content */}
             <div className="flex-1 overflow-hidden bg-ayu-bg">
               {/* Agent Tab Content */}
-              {activeTab === 'agent' && (
+              {activeTab === 'agent' && activeSessionInfo && (
                 <div className="h-full p-4 font-mono text-sm overflow-auto">
-                  {activeSession === 'claude' && (
+                  {activeSessionInfo.type === 'claude' && (
                     <ClaudeSessionChat
                       workspacePath={workspacePath}
-                      worktreeKey={getAnimationKey('claude')}
-                      hasPlayed={playedAnimations.has(getAnimationKey('claude'))}
-                      onComplete={() => markAnimationPlayed('claude')}
+                      worktreeKey={getAnimationKey(activeSessionId)}
+                      hasPlayed={playedAnimations.has(getAnimationKey(activeSessionId))}
+                      onComplete={() => markAnimationPlayed(activeSessionId)}
                     />
                   )}
 
-                  {activeSession === 'codex' && (
+                  {activeSessionInfo.type === 'codex' && (
                     <CodexSessionChat
                       workspacePath={workspacePath}
-                      worktreeKey={getAnimationKey('codex')}
-                      hasPlayed={playedAnimations.has(getAnimationKey('codex'))}
-                      onComplete={() => markAnimationPlayed('codex')}
+                      worktreeKey={getAnimationKey(activeSessionId)}
+                      hasPlayed={playedAnimations.has(getAnimationKey(activeSessionId))}
+                      onComplete={() => markAnimationPlayed(activeSessionId)}
                     />
                   )}
 
-                  {activeSession === 'gemini' && (
+                  {activeSessionInfo.type === 'gemini' && (
                     <GeminiSessionChat
                       workspacePath={workspacePath}
-                      worktreeKey={getAnimationKey('gemini')}
-                      hasPlayed={playedAnimations.has(getAnimationKey('gemini'))}
-                      onComplete={() => markAnimationPlayed('gemini')}
+                      worktreeKey={getAnimationKey(activeSessionId)}
+                      hasPlayed={playedAnimations.has(getAnimationKey(activeSessionId))}
+                      onComplete={() => markAnimationPlayed(activeSessionId)}
                     />
                   )}
                 </div>
@@ -1649,7 +1754,9 @@ export function EnsoAIDemoPreview() {
                 <div className="flex items-center px-3 py-1.5 gap-3 text-ayu-fg/60">
                   <div className="flex items-center gap-1">
                     <span className="text-ayu-func">🏷️</span>
-                    <span className={`font-medium ${currentSession?.color}`}>{currentSession?.model}</span>
+                    <span className={`font-medium ${activeSessionInfo ? sessionTypeConfigs[activeSessionInfo.type].color : ''}`}>
+                      {activeSessionInfo ? sessionTypeConfigs[activeSessionInfo.type].model : ''}
+                    </span>
                   </div>
                   <div className="text-ayu-fg/30">|</div>
                   <div className="flex items-center gap-1">
