@@ -1,7 +1,7 @@
 export default {
   translation: {
     hero: {
-      badge: "v0.1.0 Beta 现已发布",
+      badge: "v0.2.0 Beta 现已发布",
       title: "多路智能",
       titleHighlight: "并行穿梭",
       subtitle: "让多路 AI 助手化身并行线程，在同一个项目的不同分支间自由穿梭。Claude、Gemini 与 Codex 同步协作，思路永不中断。",
