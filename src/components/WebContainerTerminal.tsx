@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react';
 import { Plus, X, Terminal as TerminalIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-// Static terminal simulation data
-const terminalHistory = [
-  { type: 'input', content: 'cd ~/ensoai/workspaces/awesome-app/main', delay: 0 },
+// Static terminal simulation data (without cd command, will be added dynamically)
+const terminalCommands = [
   { type: 'input', content: 'npm install', delay: 800 },
   { type: 'output', content: 'added 1423 packages in 12s', delay: 2000 },
   { type: 'input', content: 'npm run dev', delay: 2800 },
@@ -15,6 +14,12 @@ const terminalHistory = [
   { type: 'output', content: '➜  Network: http://192.168.1.100:5173/', delay: 3900 },
 ];
 
+// Generate terminal history with dynamic path
+const getTerminalHistory = (workspacePath: string) => [
+  { type: 'input', content: `cd ${workspacePath}`, delay: 0 },
+  ...terminalCommands,
+];
+
 interface WebContainerTerminalProps {
   workspacePath?: string;
   worktreeKey: string;
@@ -23,18 +28,21 @@ interface WebContainerTerminalProps {
 }
 
 export function WebContainerTerminal({
-  workspacePath,
+  workspacePath = '',
   worktreeKey,
   hasPlayed,
   onComplete
 }: WebContainerTerminalProps) {
+  const terminalHistory = getTerminalHistory(workspacePath);
   const [visibleLines, setVisibleLines] = useState<typeof terminalHistory>(
     hasPlayed ? terminalHistory : []
   );
 
   useEffect(() => {
+    const history = getTerminalHistory(workspacePath);
+
     if (hasPlayed) {
-      setVisibleLines(terminalHistory);
+      setVisibleLines(history);
       return;
     }
 
@@ -42,10 +50,10 @@ export function WebContainerTerminal({
 
     const timers: ReturnType<typeof setTimeout>[] = [];
 
-    terminalHistory.forEach((line, index) => {
+    history.forEach((line, index) => {
       const timer = setTimeout(() => {
         setVisibleLines(prev => [...prev, line]);
-        if (index === terminalHistory.length - 1) {
+        if (index === history.length - 1) {
           onComplete();
         }
       }, line.delay);
@@ -53,7 +61,7 @@ export function WebContainerTerminal({
     });
 
     return () => timers.forEach(clearTimeout);
-  }, [worktreeKey, hasPlayed, onComplete]);
+  }, [worktreeKey, workspacePath, hasPlayed, onComplete]);
 
   return (
     <div className="h-full w-full flex flex-col bg-[#1a1a2e] text-gray-300">
