@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import {
@@ -587,17 +587,23 @@ function ClaudeSessionChat({
   workspacePath,
   worktreeKey,
   hasPlayed,
-  onComplete
+  onComplete,
+  initialProgress,
+  onProgressUpdate
 }: {
   workspacePath: string;
   worktreeKey: string;
   hasPlayed: boolean;
   onComplete: () => void;
+  initialProgress: number;
+  onProgressUpdate: (progress: number) => void;
 }) {
   const [visibleMessages, setVisibleMessages] = useState<typeof claudeConversation>(
-    hasPlayed ? claudeConversation : []
+    hasPlayed ? claudeConversation : claudeConversation.slice(0, initialProgress)
   );
   const [isComplete, setIsComplete] = useState(hasPlayed);
+  const progressRef = useRef(initialProgress);
+  const animationStartedRef = useRef(false);
 
   useEffect(() => {
     // If already played, show all messages immediately
@@ -607,25 +613,39 @@ function ClaudeSessionChat({
       return;
     }
 
-    // Reset state for new worktree
-    setVisibleMessages([]);
+    // Restore from saved progress
+    const startIndex = initialProgress;
+    setVisibleMessages(claudeConversation.slice(0, startIndex));
     setIsComplete(false);
+    progressRef.current = startIndex;
+    animationStartedRef.current = false;
 
     const timers: ReturnType<typeof setTimeout>[] = [];
 
-    claudeConversation.forEach((msg, index) => {
+    // Only schedule remaining messages
+    claudeConversation.slice(startIndex).forEach((msg, index) => {
+      const actualIndex = startIndex + index;
+      const delay = startIndex === 0 ? msg.delay : (index === 0 ? 100 : msg.delay - claudeConversation[startIndex].delay + 100);
       const timer = setTimeout(() => {
-        setVisibleMessages(prev => [...prev, msg]);
-        if (index === claudeConversation.length - 1) {
+        animationStartedRef.current = true;
+        progressRef.current = actualIndex + 1;
+        setVisibleMessages(claudeConversation.slice(0, actualIndex + 1));
+        if (actualIndex === claudeConversation.length - 1) {
           setIsComplete(true);
           onComplete();
         }
-      }, msg.delay);
+      }, delay);
       timers.push(timer);
     });
 
-    return () => timers.forEach(clearTimeout);
-  }, [worktreeKey, hasPlayed, onComplete]);
+    // Save progress when unmounting (only if animation actually started)
+    return () => {
+      timers.forEach(clearTimeout);
+      if (animationStartedRef.current) {
+        onProgressUpdate(progressRef.current);
+      }
+    };
+  }, [worktreeKey, hasPlayed, onComplete, initialProgress, onProgressUpdate]);
 
   return (
     <motion.div
@@ -730,17 +750,23 @@ function CodexSessionChat({
   workspacePath,
   worktreeKey,
   hasPlayed,
-  onComplete
+  onComplete,
+  initialProgress,
+  onProgressUpdate
 }: {
   workspacePath: string;
   worktreeKey: string;
   hasPlayed: boolean;
   onComplete: () => void;
+  initialProgress: number;
+  onProgressUpdate: (progress: number) => void;
 }) {
   const [visibleMessages, setVisibleMessages] = useState<typeof codexConversation>(
-    hasPlayed ? codexConversation : []
+    hasPlayed ? codexConversation : codexConversation.slice(0, initialProgress)
   );
   const [isComplete, setIsComplete] = useState(hasPlayed);
+  const progressRef = useRef(initialProgress);
+  const animationStartedRef = useRef(false);
 
   useEffect(() => {
     if (hasPlayed) {
@@ -749,24 +775,36 @@ function CodexSessionChat({
       return;
     }
 
-    setVisibleMessages([]);
+    const startIndex = initialProgress;
+    setVisibleMessages(codexConversation.slice(0, startIndex));
     setIsComplete(false);
+    progressRef.current = startIndex;
+    animationStartedRef.current = false;
 
     const timers: ReturnType<typeof setTimeout>[] = [];
 
-    codexConversation.forEach((msg, index) => {
+    codexConversation.slice(startIndex).forEach((msg, index) => {
+      const actualIndex = startIndex + index;
+      const delay = startIndex === 0 ? msg.delay : (index === 0 ? 100 : msg.delay - codexConversation[startIndex].delay + 100);
       const timer = setTimeout(() => {
-        setVisibleMessages(prev => [...prev, msg]);
-        if (index === codexConversation.length - 1) {
+        animationStartedRef.current = true;
+        progressRef.current = actualIndex + 1;
+        setVisibleMessages(codexConversation.slice(0, actualIndex + 1));
+        if (actualIndex === codexConversation.length - 1) {
           setIsComplete(true);
           onComplete();
         }
-      }, msg.delay);
+      }, delay);
       timers.push(timer);
     });
 
-    return () => timers.forEach(clearTimeout);
-  }, [worktreeKey, hasPlayed, onComplete]);
+    return () => {
+      timers.forEach(clearTimeout);
+      if (animationStartedRef.current) {
+        onProgressUpdate(progressRef.current);
+      }
+    };
+  }, [worktreeKey, hasPlayed, onComplete, initialProgress, onProgressUpdate]);
 
   return (
     <motion.div
@@ -856,17 +894,23 @@ function GeminiSessionChat({
   workspacePath,
   worktreeKey,
   hasPlayed,
-  onComplete
+  onComplete,
+  initialProgress,
+  onProgressUpdate
 }: {
   workspacePath: string;
   worktreeKey: string;
   hasPlayed: boolean;
   onComplete: () => void;
+  initialProgress: number;
+  onProgressUpdate: (progress: number) => void;
 }) {
   const [visibleMessages, setVisibleMessages] = useState<typeof geminiConversation>(
-    hasPlayed ? geminiConversation : []
+    hasPlayed ? geminiConversation : geminiConversation.slice(0, initialProgress)
   );
   const [isComplete, setIsComplete] = useState(hasPlayed);
+  const progressRef = useRef(initialProgress);
+  const animationStartedRef = useRef(false);
 
   useEffect(() => {
     if (hasPlayed) {
@@ -875,24 +919,36 @@ function GeminiSessionChat({
       return;
     }
 
-    setVisibleMessages([]);
+    const startIndex = initialProgress;
+    setVisibleMessages(geminiConversation.slice(0, startIndex));
     setIsComplete(false);
+    progressRef.current = startIndex;
+    animationStartedRef.current = false;
 
     const timers: ReturnType<typeof setTimeout>[] = [];
 
-    geminiConversation.forEach((msg, index) => {
+    geminiConversation.slice(startIndex).forEach((msg, index) => {
+      const actualIndex = startIndex + index;
+      const delay = startIndex === 0 ? msg.delay : (index === 0 ? 100 : msg.delay - geminiConversation[startIndex].delay + 100);
       const timer = setTimeout(() => {
-        setVisibleMessages(prev => [...prev, msg]);
-        if (index === geminiConversation.length - 1) {
+        animationStartedRef.current = true;
+        progressRef.current = actualIndex + 1;
+        setVisibleMessages(geminiConversation.slice(0, actualIndex + 1));
+        if (actualIndex === geminiConversation.length - 1) {
           setIsComplete(true);
           onComplete();
         }
-      }, msg.delay);
+      }, delay);
       timers.push(timer);
     });
 
-    return () => timers.forEach(clearTimeout);
-  }, [worktreeKey, hasPlayed, onComplete]);
+    return () => {
+      timers.forEach(clearTimeout);
+      if (animationStartedRef.current) {
+        onProgressUpdate(progressRef.current);
+      }
+    };
+  }, [worktreeKey, hasPlayed, onComplete, initialProgress, onProgressUpdate]);
 
   return (
     <motion.div
@@ -1066,6 +1122,7 @@ export function EnsoAIDemoPreview() {
   const [activeWorktree, setActiveWorktree] = useState('main');
   const [activeTab, setActiveTab] = useState('agent');
   const [playedAnimations, setPlayedAnimations] = useState<Set<string>>(new Set());
+  const [animationProgress, setAnimationProgress] = useState<Record<string, number>>({});
   const [showSessionDropdown, setShowSessionDropdown] = useState(false);
 
   // Session state per worktree
@@ -1237,6 +1294,22 @@ export function EnsoAIDemoPreview() {
       setPlayedAnimations(prev => new Set(prev).add(key));
     },
     [selectedRepo, activeWorktree]
+  );
+
+  const updateAnimationProgress = useCallback(
+    (session: string, progress: number) => {
+      const key = `${selectedRepo}:${activeWorktree}:${session}`;
+      setAnimationProgress(prev => ({ ...prev, [key]: progress }));
+    },
+    [selectedRepo, activeWorktree]
+  );
+
+  const getAnimationProgress = useCallback(
+    (session: string) => {
+      const key = `${selectedRepo}:${activeWorktree}:${session}`;
+      return animationProgress[key] || 0;
+    },
+    [selectedRepo, activeWorktree, animationProgress]
   );
 
   return (
@@ -1477,6 +1550,8 @@ export function EnsoAIDemoPreview() {
                       worktreeKey={getAnimationKey(activeSessionId)}
                       hasPlayed={playedAnimations.has(getAnimationKey(activeSessionId))}
                       onComplete={() => markAnimationPlayed(activeSessionId)}
+                      initialProgress={getAnimationProgress(activeSessionId)}
+                      onProgressUpdate={(progress) => updateAnimationProgress(activeSessionId, progress)}
                     />
                   )}
 
@@ -1486,6 +1561,8 @@ export function EnsoAIDemoPreview() {
                       worktreeKey={getAnimationKey(activeSessionId)}
                       hasPlayed={playedAnimations.has(getAnimationKey(activeSessionId))}
                       onComplete={() => markAnimationPlayed(activeSessionId)}
+                      initialProgress={getAnimationProgress(activeSessionId)}
+                      onProgressUpdate={(progress) => updateAnimationProgress(activeSessionId, progress)}
                     />
                   )}
 
@@ -1495,6 +1572,8 @@ export function EnsoAIDemoPreview() {
                       worktreeKey={getAnimationKey(activeSessionId)}
                       hasPlayed={playedAnimations.has(getAnimationKey(activeSessionId))}
                       onComplete={() => markAnimationPlayed(activeSessionId)}
+                      initialProgress={getAnimationProgress(activeSessionId)}
+                      onProgressUpdate={(progress) => updateAnimationProgress(activeSessionId, progress)}
                     />
                   )}
                 </div>
@@ -1579,6 +1658,8 @@ export function EnsoAIDemoPreview() {
                     worktreeKey={getAnimationKey('terminal')}
                     hasPlayed={playedAnimations.has(getAnimationKey('terminal'))}
                     onComplete={() => markAnimationPlayed('terminal')}
+                    initialProgress={getAnimationProgress('terminal')}
+                    onProgressUpdate={(progress) => updateAnimationProgress('terminal', progress)}
                   />
                 </motion.div>
               )}

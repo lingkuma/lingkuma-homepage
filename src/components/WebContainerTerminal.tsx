@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Plus, X, Terminal as TerminalIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -25,18 +25,24 @@ interface WebContainerTerminalProps {
   worktreeKey: string;
   hasPlayed: boolean;
   onComplete: () => void;
+  initialProgress: number;
+  onProgressUpdate: (progress: number) => void;
 }
 
 export function WebContainerTerminal({
   workspacePath = '',
   worktreeKey,
   hasPlayed,
-  onComplete
+  onComplete,
+  initialProgress,
+  onProgressUpdate
 }: WebContainerTerminalProps) {
   const terminalHistory = getTerminalHistory(workspacePath);
   const [visibleLines, setVisibleLines] = useState<typeof terminalHistory>(
-    hasPlayed ? terminalHistory : []
+    hasPlayed ? terminalHistory : terminalHistory.slice(0, initialProgress)
   );
+  const progressRef = useRef(initialProgress);
+  const animationStartedRef = useRef(false);
 
   useEffect(() => {
     const history = getTerminalHistory(workspacePath);
@@ -46,22 +52,37 @@ export function WebContainerTerminal({
       return;
     }
 
-    setVisibleLines([]);
+    // Restore from saved progress
+    const startIndex = initialProgress;
+    setVisibleLines(history.slice(0, startIndex));
+    progressRef.current = startIndex;
+    animationStartedRef.current = false;
 
     const timers: ReturnType<typeof setTimeout>[] = [];
 
-    history.forEach((line, index) => {
+    // Only schedule remaining lines
+    history.slice(startIndex).forEach((line, index) => {
+      const actualIndex = startIndex + index;
+      const delay = startIndex === 0 ? line.delay : (index === 0 ? 100 : line.delay - history[startIndex].delay + 100);
       const timer = setTimeout(() => {
-        setVisibleLines(prev => [...prev, line]);
-        if (index === history.length - 1) {
+        animationStartedRef.current = true;
+        progressRef.current = actualIndex + 1;
+        setVisibleLines(history.slice(0, actualIndex + 1));
+        if (actualIndex === history.length - 1) {
           onComplete();
         }
-      }, line.delay);
+      }, delay);
       timers.push(timer);
     });
 
-    return () => timers.forEach(clearTimeout);
-  }, [worktreeKey, workspacePath, hasPlayed, onComplete]);
+    // Save progress when unmounting (only if animation actually started)
+    return () => {
+      timers.forEach(clearTimeout);
+      if (animationStartedRef.current) {
+        onProgressUpdate(progressRef.current);
+      }
+    };
+  }, [worktreeKey, workspacePath, hasPlayed, onComplete, initialProgress, onProgressUpdate]);
 
   return (
     <div className="h-full w-full flex flex-col bg-[#1a1a2e] text-gray-300">
