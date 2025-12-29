@@ -1,6 +1,6 @@
 # EnsoAI Homepage
 
-EnsoAI 官方网站 - [ensoai.dev](https://ensoai.dev)
+EnsoAI 官方网站 - [ensoai](https://enso.j3.do/)
 
 ## 技术栈
 
