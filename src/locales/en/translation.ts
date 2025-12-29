@@ -1,7 +1,7 @@
 export default {
   translation: {
     hero: {
-      badge: "v0.2.0 Beta is now available",
+      badge: "v0.2 Beta is now available",
       title: "Multiple Agents,",
       titleHighlight: "Parallel Flow",
       subtitle: "Unleash parallel intelligence within a single project. Let Claude, Gemini, and Codex weave through different worktrees simultaneously without context switching.",
