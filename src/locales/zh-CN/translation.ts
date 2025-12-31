@@ -64,6 +64,7 @@ export default {
       designed: "为开发者 ♥ 设计。"
     },
     demo: {
+      search: "搜索",
       searchRepo: "搜索仓库",
       addRepo: "添加仓库",
       searchWorktree: "搜索 worktree",

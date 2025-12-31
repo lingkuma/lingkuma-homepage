@@ -64,6 +64,7 @@ export default {
       designed: "Designed with ♥ for developers."
     },
     demo: {
+      search: "Search",
       searchRepo: "Search repositories",
       addRepo: "Add repository",
       searchWorktree: "Search worktree",
