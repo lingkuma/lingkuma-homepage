@@ -1,6 +1,6 @@
 import { clsx } from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
-import { Brain, GitBranch, GitMerge, Layers, Zap } from "lucide-react";
+import { Brain, GitBranch, GitMerge, Layers, Search, Zap } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -44,6 +44,13 @@ export function Features() {
 			description: t("features.items.mergeTool.desc"),
 			image: "/feature-merge.png",
 			color: "text-ayu-constant",
+		},
+		{
+			icon: <Search className="w-5 h-5" />,
+			title: t("features.items.globalSearch.title"),
+			description: t("features.items.globalSearch.desc"),
+			image: "/feature-global-search.png",
+			color: "text-ayu-tag",
 		},
 	];
 

@@ -41,6 +41,10 @@ export default {
           title: "3-Way Merge Tool",
           desc: "Built-in professional 3-way merge editor. Clearly visualize conflict sources and resolve them with a single click and real-time result preview."
         },
+        globalSearch: {
+          title: "Global Search",
+          desc: "JetBrains-style project-wide search. Search by filename or content with real-time preview and instant navigation to matches."
+        },
         workspaces: {
           title: "IDE Bridge",
           desc: "Use EnsoAI for orchestration, then jump into VS Code or Cursor for deep diving with a single click."
@@ -60,6 +64,8 @@ export default {
       tagline: "Git Worktree Manager + AI Programming Assistant.",
       product: "Product",
       community: "Community",
+      newsChannel: "News Channel",
+      discussGroup: "Discussion Group",
       rights: "EnsoAI. All rights reserved.",
       designed: "Designed with ♥ for developers."
     },

@@ -1,4 +1,4 @@
-import { Github } from 'lucide-react';
+import { Github, Send } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 export function Footer() {
@@ -31,6 +31,8 @@ export function Footer() {
             <h3 className="font-semibold text-ayu-fg mb-4 text-sm uppercase tracking-wider">{t('footer.community')}</h3>
             <ul className="space-y-3 text-sm">
               <li><a href="https://github.com/j3n5en/EnsoAI" className="text-ayu-fg/60 hover:text-ayu-accent transition-colors flex items-center gap-2"><Github className="w-4 h-4"/> GitHub</a></li>
+              <li><a href="https://t.me/EnsoAI_news" target="_blank" rel="noopener noreferrer" className="text-ayu-fg/60 hover:text-ayu-accent transition-colors flex items-center gap-2"><Send className="w-4 h-4"/> {t('footer.newsChannel')}</a></li>
+              <li><a href="https://t.me/EnsoAi_Offical" target="_blank" rel="noopener noreferrer" className="text-ayu-fg/60 hover:text-ayu-accent transition-colors flex items-center gap-2"><Send className="w-4 h-4"/> {t('footer.discussGroup')}</a></li>
             </ul>
           </div>
         </div>
