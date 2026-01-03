@@ -51,6 +51,26 @@ export function Hero() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex justify-center mb-6"
+          >
+            <a
+              href="https://www.producthunt.com/products/ensoai?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-ensoai"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1057621&theme=light&t=1767440460929"
+                alt="EnsoAI - Multiple AI Agents, Parallel Workflow in Git Worktrees | Product Hunt"
+                width="250"
+                height="54"
+              />
+            </a>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
           >
             <Button
