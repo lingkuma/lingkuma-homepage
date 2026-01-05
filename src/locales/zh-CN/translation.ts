@@ -2,9 +2,9 @@ export default {
   translation: {
     hero: {
       badge: "v0.2 Beta 现已发布",
-      title: "多路智能",
-      titleHighlight: "并行穿梭",
-      subtitle: "让多路 AI 助手化身并行线程，在同一个项目的不同分支间自由穿梭。Claude、Gemini 与 Codex 同步协作，思路永不中断。",
+      title: "🐻熊祸鱼塘",
+      titleHighlight: "🐟 语获满满",
+      subtitle: "开发和分享更多开源软件，让学语言更简单，更高效。",
       cta: {
         download: "立刻下载",
         manifest: "查看源码"
@@ -18,16 +18,16 @@ export default {
       download: "下载"
     },
     features: {
-      title: "重构你的工作流",
-      subtitle: "告别 git stash。EnsoAI 将每个分支视为一等公民，赋予其独立的工作区与 AI 上下文。",
+      title: "探索鱼塘中的宝藏吧",
+      subtitle: "借助更多工具，让学习语言变得更简单，更高效，更有趣",
       items: {
         aiNative: {
-          title: "多 Agent 矩阵",
-          desc: "无缝切换 Claude、Codex、Gemini 或本地 LLM。每个 Worktree 都有独立的持久化 AI 会话。"
+          title: "Lingkuma - 通过网页打开阅读的大门",
+          desc: "高亮，句子爆炸，AI翻译解析，记录您学习的每一个单词"
         },
         blazingFast: {
-          title: "内置 Git 管理器",
-          desc: "优雅的可视化 Git 面板。通过键盘即可完成差异对比、暂存修改和提交代码。"
+          title: "SyncLingua - 对话同步助手，让ai助教更智能",
+          desc: "侧栏辅助对话框实时读取对话记录，实时给出建议，就像请了真的助教一样"
         },
         beautifulThemes: {
           title: "内置代码编辑器",
