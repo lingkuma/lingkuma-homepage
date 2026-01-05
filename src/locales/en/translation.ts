@@ -2,9 +2,9 @@ export default {
   translation: {
     hero: {
       badge: "v0.2 Beta is now available",
-      title: "Multiple Agents,",
-      titleHighlight: "Parallel Flow",
-      subtitle: "Unleash parallel intelligence within a single project. Let Claude, Gemini, and Codex weave through different worktrees simultaneously without context switching.",
+      title: "powerful tools for",
+      titleHighlight: " language learning",
+      subtitle: "Develop and share language learning tools",
       cta: {
         download: "Download Now",
         manifest: "Source Code"
@@ -18,40 +18,40 @@ export default {
       download: "Download"
     },
     features: {
-      title: "Workflow, Reimagined.",
-      subtitle: "Stop stashing and popping. EnsoAI treats every branch as a first-class workspace with its own dedicated AI context.",
+      title: "Explore the treasures",
+      subtitle: "With more tools, make language learning simpler, more efficient, and more fun",
       items: {
         aiNative: {
-          title: "Multi-Agent Matrix",
-          desc: "Seamlessly switch between Claude, Codex, Gemini, and local LLMs. Each worktree gets its own persistent AI session."
+          title: "Lingkuma - Open the door to reading through web pages",
+          desc: "Highlighting, sentence explosion, AI translation analysis, record every word you learn"
         },
         blazingFast: {
-          title: "Visual Source Control",
-          desc: "Review diffs, stage changes, and manage commits with a beautiful, keyboard-centric Git interface."
+          title: "SyncLingua - Conversation sync assistant, make AI tutors smarter",
+          desc: "Sidebar assistant dialog reads conversation records in real-time, provides suggestions in real-time, just like having a real tutor"
         },
         beautifulThemes: {
-          title: "Integrated File Editor",
-          desc: "Built-in Monaco editor for quick edits. Syntax highlighting for 50+ languages with drag-and-drop multi-tab support."
+          title: "Lunatranslator - Extract and translate text from games",
+          desc: "Super useful software developed by HIllya51, can extract text from Galgame and open it with web pages, pair with Lingkuma for immersive learning!"
         },
         visualGit: {
           title: "AI Code Review",
-          desc: "Auto-generate high-quality commit messages and perform deep code reviews using your favorite AI agents."
+          desc: "Auto-generate high-quality commit messages and use AI assistants to deeply review and optimize code changes."
         },
         mergeTool: {
           title: "3-Way Merge Tool",
-          desc: "Built-in professional 3-way merge editor. Clearly visualize conflict sources and resolve them with a single click and real-time result preview."
+          desc: "Built-in professional 3-way merge editor. Clearly display conflict sources, support one-click adoption of changes and real-time result preview, making conflict resolution easy and pleasant."
         },
         globalSearch: {
-          title: "Global Search",
-          desc: "JetBrains-style project-wide search. Search by filename or content with real-time preview and instant navigation to matches."
+          title: "Project Global Search",
+          desc: "JetBrains-style global search. Supports dual-mode search by filename and content, real-time preview of matching results, precise positioning of target code."
         },
         workspaces: {
           title: "IDE Bridge",
-          desc: "Use EnsoAI for orchestration, then jump into VS Code or Cursor for deep diving with a single click."
+          desc: "Orchestrate globally in EnsoAI, jump to VS Code or Cursor with one click for deep development. Seamlessly connect with existing toolchain."
         },
         shellIntegration: {
-          title: "Git Worktree Management",
-          desc: "Create, switch, and manage Git worktrees instantly. No more context switching costs between branches."
+          title: "Worktree Management",
+          desc: "Create and switch Git Worktrees in milliseconds. Freely shuttle between different feature branches without repeatedly configuring the environment."
         }
       }
     },

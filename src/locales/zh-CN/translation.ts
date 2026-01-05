@@ -3,7 +3,7 @@ export default {
     hero: {
       badge: "v0.2 Beta 现已发布",
       title: "🐻熊祸鱼塘",
-      titleHighlight: "🐟 语获满满",
+      titleHighlight: "🐟语获满满",
       subtitle: "开发和分享更多开源软件，让学语言更简单，更高效。",
       cta: {
         download: "立刻下载",

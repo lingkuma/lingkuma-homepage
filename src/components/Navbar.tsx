@@ -14,8 +14,8 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center gap-2">
-            <img src="/logo.png" alt="EnsoAI Logo" className="w-8 h-8 rounded-lg shadow-sm" />
-            <span className="font-bold text-xl tracking-tight text-ayu-fg">EnsoAI</span>
+            <img src="/logo.png" alt="Lingkuma Logo" className="w-8 h-8 rounded-lg shadow-sm" />
+            <span className="font-bold text-xl tracking-tight text-ayu-fg">Lingkuma</span>
           </div>
 
           <div className="hidden md:flex items-center gap-8">

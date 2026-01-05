@@ -10,8 +10,8 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="col-span-1 md:col-span-2 space-y-4">
             <div className="flex items-center gap-2">
-              <img src="/logo.png" alt="EnsoAI Logo" className="w-6 h-6 rounded shadow-sm" />
-              <span className="font-bold text-lg text-ayu-fg">EnsoAI</span>
+              <img src="/logo.png" alt="Lingkuma Logo" className="w-6 h-6 rounded shadow-sm" />
+              <span className="font-bold text-lg text-ayu-fg">Lingkuma</span>
             </div>
             <p className="text-ayu-fg/60 text-sm max-w-sm leading-relaxed">
               {t('footer.tagline')}
