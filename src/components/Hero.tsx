@@ -2,7 +2,6 @@ import { Button } from './Button';
 import { Github, Download } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { EnsoAIDemoPreview } from './EnsoAIDemoPreview';
 
 export function Hero() {
   const { t } = useTranslation();
@@ -91,11 +90,6 @@ export function Hero() {
               <Github className="w-4 h-4 ml-2" />
             </Button>
           </motion.div>
-        </div>
-
-        {/* Demo Preview - Hidden on mobile */}
-        <div id="demo-preview" className="hidden lg:block relative">
-          <EnsoAIDemoPreview />
         </div>
       </div>
     </section>
