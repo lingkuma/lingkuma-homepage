@@ -12,16 +12,6 @@ export function Hero() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-ayu-panel border border-ayu-line shadow-sm text-sm font-medium text-ayu-fg/80 mb-8 hover:border-ayu-accent/50 transition-colors cursor-default"
-          >
-            <span className="w-2 h-2 rounded-full bg-ayu-accent"></span>
-            {t('hero.badge')}
-          </motion.div>
-
           <motion.h1
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -45,51 +35,6 @@ export function Hero() {
           >
             {t('hero.subtitle')}
           </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="flex justify-center mb-6"
-          >
-            <a
-              href="https://www.producthunt.com/products/ensoai?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-ensoai"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1057621&theme=light&t=1767440460929"
-                alt="EnsoAI - Multiple AI Agents, Parallel Workflow in Git Worktrees | Product Hunt"
-                width="250"
-                height="54"
-              />
-            </a>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
-          >
-            <Button
-              size="lg"
-              className="rounded-full px-8 h-14 text-base font-semibold shadow-xl shadow-ayu-accent/10 hover:shadow-ayu-accent/20 hover:-translate-y-0.5 transition-all"
-              onClick={() => window.open('https://github.com/j3n5en/EnsoAI/releases/latest', '_blank')}
-            >
-              {t('hero.cta.download')}
-              <Download className="w-4 h-4 ml-2" />
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="rounded-full px-8 h-14 text-base font-semibold bg-ayu-panel hover:bg-ayu-line/50 hover:-translate-y-0.5 transition-all"
-              onClick={() => window.open('https://github.com/j3n5en/EnsoAI', '_blank')}
-            >
-              {t('hero.cta.manifest')}
-              <Github className="w-4 h-4 ml-2" />
-            </Button>
-          </motion.div>
         </div>
       </div>
     </section>
