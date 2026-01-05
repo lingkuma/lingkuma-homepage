@@ -30,8 +30,8 @@ export default {
           desc: "侧栏辅助对话框实时读取对话记录，实时给出建议，就像请了真的助教一样"
         },
         beautifulThemes: {
-          title: "内置代码编辑器",
-          desc: "基于 Monaco 构建的轻量级编辑器。支持 50+ 种语言高亮，提供流畅的多标签拖拽体验。"
+          title: "Lunatranslator - 将游戏中的文本获取出来并翻译",
+          desc: "HIllya51开发的超好用软件，可以将Galgame（旮旯给木）的文本获取出来并用网页打开，搭配Lingkuma沉浸学习吧！"
         },
         visualGit: {
           title: "AI 代码审查",
