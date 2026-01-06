@@ -1,5 +1,5 @@
 import { Button } from './Button';
-import { Github, Download } from 'lucide-react';
+import { Github, Download, MessageCircle, Send, MessageSquare } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
@@ -35,6 +35,32 @@ export function Hero() {
           >
             {t('hero.subtitle')}
           </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex items-center justify-center gap-4 mb-12"
+          >
+            <a href="http://dc.lingkuma.org/" target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" size="md" className="gap-2">
+                <MessageCircle className="w-4 h-4" />
+                {t('hero.community.discord')}
+              </Button>
+            </a>
+            <a href="http://tg.lingkuma.org/" target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" size="md" className="gap-2">
+                <Send className="w-4 h-4" />
+                {t('hero.community.telegram')}
+              </Button>
+            </a>
+            <a href="https://pd.qq.com/s/hbotsiacz" target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" size="md" className="gap-2">
+                <MessageSquare className="w-4 h-4" />
+                {t('hero.community.qq')}
+              </Button>
+            </a>
+          </motion.div>
         </div>
       </div>
     </section>

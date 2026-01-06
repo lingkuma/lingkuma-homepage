@@ -8,6 +8,11 @@ export default {
       cta: {
         download: "立刻下载",
         manifest: "查看源码"
+      },
+      community: {
+        discord: "Discord",
+        telegram: "Telegram",
+        qq: "QQ频道"
       }
     },
     nav: {

@@ -8,6 +8,11 @@ export default {
       cta: {
         download: "Download Now",
         manifest: "Source Code"
+      },
+      community: {
+        discord: "Discord",
+        telegram: "Telegram",
+        qq: "QQ Channel"
       }
     },
     nav: {
