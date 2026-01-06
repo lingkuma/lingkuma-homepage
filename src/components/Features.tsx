@@ -1,6 +1,6 @@
 import { clsx } from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
-import { Brain, GitBranch, GitMerge, Layers, Search, Zap } from "lucide-react";
+import { Brain, GitBranch, GitMerge, Layers, Search, Zap, Globe, Github } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -16,6 +16,8 @@ export function Features() {
 			description: t("features.items.aiNative.desc"),
 			image: "/feature-terminal.png",
 			color: "text-ayu-accent",
+			homepageUrl: "https://docs.lingkuma.org/",
+			githubUrl: "https://github.com/lingkuma/lingkuma",
 		},
 		{
 			icon: <GitBranch className="w-5 h-5" />,
@@ -23,6 +25,8 @@ export function Features() {
 			description: t("features.items.blazingFast.desc"),
 			image: "/feature-editor.png",
 			color: "text-ayu-string",
+			homepageUrl: "https://chat.lingkuma.org/",
+			githubUrl: "https://github.com/lingkuma/synclingua",
 		},
 		{
 			icon: <Zap className="w-5 h-5" />,
@@ -30,6 +34,8 @@ export function Features() {
 			description: t("features.items.beautifulThemes.desc"),
 			image: "/feature-git.png",
 			color: "text-ayu-func",
+			homepageUrl: "https://docs.lunatranslator.org/",
+			githubUrl: "https://github.com/HIllya51/LunaTranslator",
 		},
 		{
 			icon: <Layers className="w-5 h-5" />,
@@ -37,6 +43,8 @@ export function Features() {
 			description: t("features.items.visualGit.desc"),
 			image: "/feature-agents.png",
 			color: "text-ayu-regexp",
+			homepageUrl: "https://example.com/project4",
+			githubUrl: "https://github.com/example/project4",
 		},
 		{
 			icon: <GitMerge className="w-5 h-5" />,
@@ -44,6 +52,8 @@ export function Features() {
 			description: t("features.items.mergeTool.desc"),
 			image: "/feature-merge.png",
 			color: "text-ayu-constant",
+			homepageUrl: "https://example.com/project5",
+			githubUrl: "https://github.com/example/project5",
 		},
 		{
 			icon: <Search className="w-5 h-5" />,
@@ -51,6 +61,8 @@ export function Features() {
 			description: t("features.items.globalSearch.desc"),
 			image: "/feature-global-search.png",
 			color: "text-ayu-tag",
+			homepageUrl: "https://example.com/project6",
+			githubUrl: "https://github.com/example/project6",
 		},
 	];
 
@@ -134,9 +146,41 @@ export function Features() {
 											{feature.title}
 										</h3>
 									</div>
-									<p className="text-sm text-ayu-fg/60 leading-relaxed pl-12">
+									<p className="text-sm text-ayu-fg/60 leading-relaxed pl-12 mb-3">
 										{feature.description}
 									</p>
+									<div className="flex gap-2 pl-12">
+										<a
+											href={feature.homepageUrl}
+											target="_blank"
+											rel="noopener noreferrer"
+											className={clsx(
+												"inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all",
+												activeFeature === index
+													? "bg-ayu-bg text-ayu-fg hover:bg-ayu-fg/10"
+													: "bg-ayu-panel/50 text-ayu-fg/70 hover:bg-ayu-panel hover:text-ayu-fg"
+											)}
+											onClick={(e) => e.stopPropagation()}
+										>
+											<Globe className="w-3.5 h-3.5" />
+											主页
+										</a>
+										<a
+											href={feature.githubUrl}
+											target="_blank"
+											rel="noopener noreferrer"
+											className={clsx(
+												"inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all",
+												activeFeature === index
+													? "bg-ayu-bg text-ayu-fg hover:bg-ayu-fg/10"
+													: "bg-ayu-panel/50 text-ayu-fg/70 hover:bg-ayu-panel hover:text-ayu-fg"
+											)}
+											onClick={(e) => e.stopPropagation()}
+										>
+											<Github className="w-3.5 h-3.5" />
+											GitHub
+										</a>
+									</div>
 								</div>
 							</button>
 						))}

@@ -23,14 +23,14 @@ export function Navbar() {
 
           <div className="hidden md:flex items-center gap-3">
             <LanguageSwitcher />
-            <Button variant="ghost" size="sm" className="gap-2 text-ayu-fg/70" onClick={() => window.open('https://github.com/j3n5en/EnsoAI', '_blank')}>
+            <Button variant="ghost" size="sm" className="gap-2 text-ayu-fg/70" onClick={() => window.open('https://github.com/lingkuma/lingkuma', '_blank')}>
               <Github className="w-4 h-4" />
               <span>{t('nav.star')}</span>
             </Button>
             <Button 
               size="sm" 
               className="rounded-full px-5"
-              onClick={() => window.open('https://github.com/j3n5en/EnsoAI/releases/latest', '_blank')}
+              onClick={() => window.open('https://app.lingkuma.org', '_blank')}
             >
               {t('nav.download')}
             </Button>
@@ -55,7 +55,7 @@ export function Navbar() {
           >
             <div className="px-4 py-4 flex flex-col gap-4">
               <div className="pt-2 flex flex-col gap-2">
-                 <Button className="w-full justify-center" onClick={() => window.open('https://github.com/j3n5en/EnsoAI/releases/latest', '_blank')}>{t('nav.download')}</Button>
+                 <Button className="w-full justify-center" onClick={() => window.open('https://app.lingkuma.org', '_blank')}>{t('nav.download')}</Button>
               </div>
             </div>
           </motion.div>
