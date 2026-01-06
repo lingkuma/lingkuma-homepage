@@ -65,6 +65,30 @@ export default {
       desc: "EnsoAI 尊重你的品味。内置多种 Ghostty 主题，支持自定义字体，并在所有 Worktree 间同步你的视觉风格。",
       more: "以及 400+ 更多 Ghostty 主题..."
     },
+    articles: {
+      title: "精选文章",
+      subtitle: "深度好文，助你在语言学习路上走得更远",
+      items: {
+        visualGit: {
+          title: "基于二语习得理论的日语学习指南(WIP)",
+          desc: "好文分享，基于二语习得理论的日语学习指南，帮助你更好的学习日语。",
+          tag: "日语学习",
+          url: "https://eaa9gdwuyv7.feishu.cn/wiki/YeOSwsG7giLuQxkcDFscUXVZn2f"
+        },
+        refold: {
+          title: "Refold - 新语言学习路线图",
+          desc: "如何学习一门新语言？从零开始的语言学习完整指南。",
+          tag: "学习方法",
+          url: "https://refold.la/simplified/"
+        },
+        immersion: {
+          title: "沉浸式学习的艺术",
+          desc: "通过大量可理解输入，在不知不觉中掌握语言。",
+          tag: "沉浸学习",
+          url: "#"
+        }
+      }
+    },
     footer: {
       tagline: "Lingkuma - 让学习语言变得更简单，更高效，更有趣",
       product: "产品",

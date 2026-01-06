@@ -65,6 +65,30 @@ export default {
       desc: "EnsoAI respects your taste. Built-in variety of Ghostty themes, customizable fonts, and synchronized visual style across all worktrees.",
       more: "400+ more Ghostty themes..."
     },
+    articles: {
+      title: "Featured Articles",
+      subtitle: "In-depth articles to help you go further in language learning",
+      items: {
+        visualGit: {
+          title: "Japanese Learning Guide Based on SLA Theory (WIP)",
+          desc: "A Japanese learning guide based on Second Language Acquisition theory to help you learn Japanese better.",
+          tag: "Japanese",
+          url: "https://eaa9gdwuyv7.feishu.cn/wiki/YeOSwsG7giLuQxkcDFscUXVZn2f"
+        },
+        refold: {
+          title: "Refold - Roadmap for Learning New Language",
+          desc: "How to learn a new language? A complete guide to language learning from scratch.",
+          tag: "Learning Method",
+          url: "https://refold.la/"
+        },
+        immersion: {
+          title: "The Art of Immersion Learning",
+          desc: "Master a language unconsciously through massive comprehensible input.",
+          tag: "Immersion",
+          url: "#"
+        }
+      }
+    },
     footer: {
       tagline: "Lingkuma - Making language learning simpler, more efficient, and more fun",
       product: "Product",

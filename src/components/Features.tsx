@@ -1,6 +1,6 @@
 import { clsx } from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
-import { Brain, GitBranch, GitMerge, Layers, Search, Zap, Globe, Github } from "lucide-react";
+import { Brain, GitBranch, GitMerge, Layers, Search, Zap, Globe, Github, BookOpen, ArrowRight } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -66,6 +66,30 @@ export function Features() {
 		},
 	];
 
+	const articles = [
+		{
+			title: t("articles.items.visualGit.title"),
+			description: t("articles.items.visualGit.desc"),
+			tag: t("articles.items.visualGit.tag"),
+			url: t("articles.items.visualGit.url"),
+			color: "bg-ayu-accent/10 text-ayu-accent",
+		},
+		{
+			title: t("articles.items.refold.title"),
+			description: t("articles.items.refold.desc"),
+			tag: t("articles.items.refold.tag"),
+			url: t("articles.items.refold.url"),
+			color: "bg-ayu-string/10 text-ayu-string",
+		},
+		{
+			title: t("articles.items.immersion.title"),
+			description: t("articles.items.immersion.desc"),
+			tag: t("articles.items.immersion.tag"),
+			url: t("articles.items.immersion.url"),
+			color: "bg-ayu-func/10 text-ayu-func",
+		},
+	];
+
 	const startTimer = useCallback(() => {
 		if (timerRef.current) {
 			clearInterval(timerRef.current);
@@ -90,34 +114,35 @@ export function Features() {
 	}, [startTimer]);
 
 	return (
-		<section
-			id="features"
-			className="pt-24 pb-12 bg-ayu-bg relative border-t border-ayu-line"
-		>
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-				<div className="mb-20 text-center">
-					<h2 className="text-4xl md:text-5xl font-bold text-ayu-fg mb-6 tracking-tight">
-						{t("features.title")}
-					</h2>
-					<p className="text-xl text-ayu-fg/60 max-w-2xl mx-auto leading-relaxed font-light">
-						{t("features.subtitle")}
-					</p>
-				</div>
+		<>
+			<section
+				id="features"
+				className="pt-24 pb-12 bg-ayu-bg relative border-t border-ayu-line"
+			>
+				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+					<div className="mb-20 text-center">
+						<h2 className="text-4xl md:text-5xl font-bold text-ayu-fg mb-6 tracking-tight">
+							{t("features.title")}
+						</h2>
+						<p className="text-xl text-ayu-fg/60 max-w-2xl mx-auto leading-relaxed font-light">
+							{t("features.subtitle")}
+						</p>
+					</div>
 
-				<div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
-					{/* Left Side: Feature List */}
-					<div className="w-full lg:w-1/3 flex flex-col gap-4">
-						{features.map((feature, index) => (
-							<button
-								key={index}
-								onClick={() => handleFeatureClick(index)}
-																	className={clsx(
-																		"text-left p-6 rounded-2xl transition-all duration-300 border group relative overflow-hidden",
-																		activeFeature === index
-																			? "bg-ayu-panel border-ayu-line shadow-lg scale-[1.02]"
-																			: "bg-transparent border-transparent hover:bg-ayu-panel/50 hover:border-ayu-line/50 opacity-60 hover:opacity-100",
-																	)}
-																>								{activeFeature === index && (
+					<div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
+						{/* Left Side: Feature List */}
+						<div className="w-full lg:w-1/3 flex flex-col gap-4">
+							{features.map((feature, index) => (
+								<button
+									key={index}
+									onClick={() => handleFeatureClick(index)}
+																		className={clsx(
+																			"text-left p-6 rounded-2xl transition-all duration-300 border group relative overflow-hidden",
+																			activeFeature === index
+																				? "bg-ayu-panel border-ayu-line shadow-lg scale-[1.02]"
+																				: "bg-transparent border-transparent hover:bg-ayu-panel/50 hover:border-ayu-line/50 opacity-60 hover:opacity-100",
+																		)}
+																	>								{activeFeature === index && (
 									<motion.div
 										layoutId="active-glow"
 										className="absolute inset-0 bg-gradient-to-r from-ayu-accent/5 to-transparent opacity-50"
@@ -254,5 +279,53 @@ export function Features() {
 				</div>
 			</div>
 		</section>
+
+		{/* Articles Section */}
+		<section className="py-24 bg-ayu-bg relative">
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div className="mb-16 text-center">
+					<div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full bg-ayu-panel border border-ayu-line">
+						<BookOpen className="w-4 h-4 text-ayu-accent" />
+						<span className="text-sm font-medium text-ayu-fg/80">Knowledge Base</span>
+					</div>
+					<h2 className="text-4xl md:text-5xl font-bold text-ayu-fg mb-6 tracking-tight">
+						{t("articles.title")}
+					</h2>
+					<p className="text-xl text-ayu-fg/60 max-w-2xl mx-auto leading-relaxed font-light">
+						{t("articles.subtitle")}
+					</p>
+				</div>
+
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+					{articles.map((article, index) => (
+						<motion.a
+							key={index}
+							href={article.url}
+							target="_blank"
+							rel="noopener noreferrer"
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							viewport={{ once: true }}
+							transition={{ duration: 0.5, delay: index * 0.1 }}
+							className="group relative bg-ayu-panel border border-ayu-line rounded-2xl p-6 hover:border-ayu-accent/50 transition-all duration-300 hover:shadow-lg hover:shadow-ayu-accent/5"
+						>
+							<div className="flex items-start justify-between mb-4">
+								<span className={clsx("px-3 py-1 rounded-full text-xs font-medium", article.color)}>
+									{article.tag}
+								</span>
+								<ArrowRight className="w-5 h-5 text-ayu-fg/40 group-hover:text-ayu-accent group-hover:translate-x-1 transition-all duration-300" />
+							</div>
+							<h3 className="text-lg font-bold text-ayu-fg mb-3 group-hover:text-ayu-accent transition-colors">
+								{article.title}
+							</h3>
+							<p className="text-sm text-ayu-fg/60 leading-relaxed">
+								{article.description}
+							</p>
+						</motion.a>
+					))}
+				</div>
+			</div>
+		</section>
+		</>
 	);
 }
