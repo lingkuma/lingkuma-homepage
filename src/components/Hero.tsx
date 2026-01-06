@@ -1,5 +1,5 @@
 import { Button } from './Button';
-import { Github, Download, MessageCircle, Send, MessageSquare } from 'lucide-react';
+import { MessageCircle, Send, MessageSquare } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
