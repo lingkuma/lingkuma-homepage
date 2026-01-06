@@ -34,24 +34,24 @@ export default {
           desc: "Super useful software developed by HIllya51, can extract text from Galgame and open it with web pages, pair with Lingkuma for immersive learning!"
         },
         visualGit: {
-          title: "AI Code Review",
-          desc: "Auto-generate high-quality commit messages and use AI assistants to deeply review and optimize code changes."
+          title: "Coming Soon",
+          desc: "Coming Soon"
         },
         mergeTool: {
-          title: "3-Way Merge Tool",
-          desc: "Built-in professional 3-way merge editor. Clearly display conflict sources, support one-click adoption of changes and real-time result preview, making conflict resolution easy and pleasant."
+          title: "Coming Soon",
+          desc: "Coming Soon"
         },
         globalSearch: {
-          title: "Project Global Search",
-          desc: "JetBrains-style global search. Supports dual-mode search by filename and content, real-time preview of matching results, precise positioning of target code."
+          title: "Coming Soon",
+          desc: "Coming Soon"
         },
         workspaces: {
-          title: "IDE Bridge",
-          desc: "Orchestrate globally in EnsoAI, jump to VS Code or Cursor with one click for deep development. Seamlessly connect with existing toolchain."
+          title: "Coming Soon",
+          desc: "Coming Soon"
         },
         shellIntegration: {
-          title: "Worktree Management",
-          desc: "Create and switch Git Worktrees in milliseconds. Freely shuttle between different feature branches without repeatedly configuring the environment."
+          title: "Coming Soon",
+          desc: "Coming Soon"
         }
       }
     },
