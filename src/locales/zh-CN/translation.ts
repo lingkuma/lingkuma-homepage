@@ -39,8 +39,8 @@ export default {
           desc: "HIllya51开发的超好用软件，可以将Galgame（旮旯给木）的文本获取出来并用网页打开，搭配Lingkuma沉浸学习吧！"
         },
         visualGit: {
-          title: "开发中... ",
-          desc: "开发中... "
+          title: "基于二语习得理论的日语学习指南(WIP)",
+          desc: "好文分享，基于二语习得理论的日语学习指南，帮助你更好的学习日语。"
         },
         mergeTool: {
           title: "开发中... ",
