@@ -61,12 +61,12 @@ export default {
       more: "400+ more Ghostty themes..."
     },
     footer: {
-      tagline: "Git Worktree Manager + AI Programming Assistant.",
+      tagline: "Lingkuma - Making language learning simpler, more efficient, and more fun",
       product: "Product",
       community: "Community",
       newsChannel: "News Channel",
       discussGroup: "Discussion Group",
-      rights: "EnsoAI. All rights reserved.",
+      rights: "Lingkuma. All rights reserved.",
       designed: "Designed with ♥ for developers."
     },
     demo: {
