@@ -62,7 +62,7 @@ export default {
     },
     themes: {
       title: "Your aesthetic, preserved.",
-      desc: "EnsoAI respects your taste. Built-in variety of Ghostty themes, customizable fonts, and synchronized visual style across all worktrees.",
+      desc: "Lingkuma respects your taste. Built-in variety of Ghostty themes, customizable fonts, and synchronized visual style across all worktrees.",
       more: "400+ more Ghostty themes..."
     },
     articles: {

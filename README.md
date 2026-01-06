@@ -1,6 +1,6 @@
-# EnsoAI Homepage
+# Lingkuma Homepage
 
-EnsoAI 官方网站 - [ensoai](https://enso.j3.do/)
+Lingkuma 官方网站 - [Lingkuma](https://lingkuma.org/)
 
 ## 技术栈
 

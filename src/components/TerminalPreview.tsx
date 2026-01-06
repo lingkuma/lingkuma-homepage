@@ -12,7 +12,7 @@ export function TerminalPreview() {
       >
         <img 
           src="/terminal-preview.png" 
-          alt="EnsoAI Terminal Interface" 
+          alt="Lingkuma Terminal Interface" 
           className="w-full h-auto rounded-lg shadow-2xl border border-ayu-line/50"
         />
       </motion.div>
