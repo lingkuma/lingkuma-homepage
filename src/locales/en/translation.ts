@@ -39,8 +39,8 @@ export default {
           desc: "Super useful software developed by HIllya51, can extract text from Galgame and open it with web pages, pair with Lingkuma for immersive learning!"
         },
         visualGit: {
-          title: "Refold - Roadmap for learning new language",
-          desc: "How to learn new language"
+       title: "Coming Soon",
+          desc: "Coming Soon"
         },
         mergeTool: {
           title: "Coming Soon",
