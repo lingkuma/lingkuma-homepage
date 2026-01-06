@@ -43,8 +43,8 @@ export function Features() {
 			description: t("features.items.visualGit.desc"),
 			image: "/feature-agents.png",
 			color: "text-ayu-regexp",
-			homepageUrl: "https://example.com/project4",
-			githubUrl: "https://github.com/example/project4",
+			cnUrl: "https://example.com/project4/cn",
+			enUrl: "https://example.com/project4/en",
 		},
 		{
 			icon: <GitMerge className="w-5 h-5" />,
@@ -150,36 +150,73 @@ export function Features() {
 										{feature.description}
 									</p>
 									<div className="flex gap-2 pl-12">
-										<a
-											href={feature.homepageUrl}
-											target="_blank"
-											rel="noopener noreferrer"
-											className={clsx(
-												"inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all",
-												activeFeature === index
-													? "bg-ayu-bg text-ayu-fg hover:bg-ayu-fg/10"
-													: "bg-ayu-panel/50 text-ayu-fg/70 hover:bg-ayu-panel hover:text-ayu-fg"
-											)}
-											onClick={(e) => e.stopPropagation()}
-										>
-											<Globe className="w-3.5 h-3.5" />
-											主页
-										</a>
-										<a
-											href={feature.githubUrl}
-											target="_blank"
-											rel="noopener noreferrer"
-											className={clsx(
-												"inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all",
-												activeFeature === index
-													? "bg-ayu-bg text-ayu-fg hover:bg-ayu-fg/10"
-													: "bg-ayu-panel/50 text-ayu-fg/70 hover:bg-ayu-panel hover:text-ayu-fg"
-											)}
-											onClick={(e) => e.stopPropagation()}
-										>
-											<Github className="w-3.5 h-3.5" />
-											GitHub
-										</a>
+										{("cnUrl" in feature && "enUrl" in feature) ? (
+											<>
+												<a
+													href={feature.cnUrl}
+													target="_blank"
+													rel="noopener noreferrer"
+													className={clsx(
+														"inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all",
+														activeFeature === index
+															? "bg-ayu-bg text-ayu-fg hover:bg-ayu-fg/10"
+															: "bg-ayu-panel/50 text-ayu-fg/70 hover:bg-ayu-panel hover:text-ayu-fg"
+													)}
+													onClick={(e) => e.stopPropagation()}
+												>
+													<Globe className="w-3.5 h-3.5" />
+													中文
+												</a>
+												<a
+													href={feature.enUrl}
+													target="_blank"
+													rel="noopener noreferrer"
+													className={clsx(
+														"inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all",
+														activeFeature === index
+															? "bg-ayu-bg text-ayu-fg hover:bg-ayu-fg/10"
+															: "bg-ayu-panel/50 text-ayu-fg/70 hover:bg-ayu-panel hover:text-ayu-fg"
+													)}
+													onClick={(e) => e.stopPropagation()}
+												>
+													<Globe className="w-3.5 h-3.5" />
+													English
+												</a>
+											</>
+										) : (
+											<>
+												<a
+													href={feature.homepageUrl}
+													target="_blank"
+													rel="noopener noreferrer"
+													className={clsx(
+														"inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all",
+														activeFeature === index
+															? "bg-ayu-bg text-ayu-fg hover:bg-ayu-fg/10"
+															: "bg-ayu-panel/50 text-ayu-fg/70 hover:bg-ayu-panel hover:text-ayu-fg"
+													)}
+													onClick={(e) => e.stopPropagation()}
+												>
+													<Globe className="w-3.5 h-3.5" />
+													主页
+												</a>
+												<a
+													href={feature.githubUrl}
+													target="_blank"
+													rel="noopener noreferrer"
+													className={clsx(
+														"inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all",
+														activeFeature === index
+															? "bg-ayu-bg text-ayu-fg hover:bg-ayu-fg/10"
+															: "bg-ayu-panel/50 text-ayu-fg/70 hover:bg-ayu-panel hover:text-ayu-fg"
+													)}
+													onClick={(e) => e.stopPropagation()}
+												>
+													<Github className="w-3.5 h-3.5" />
+													GitHub
+												</a>
+											</>
+										)}
 									</div>
 								</div>
 							</button>
