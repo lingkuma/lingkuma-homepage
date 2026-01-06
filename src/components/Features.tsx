@@ -43,8 +43,8 @@ export function Features() {
 			description: t("features.items.visualGit.desc"),
 			image: "/feature-agents.png",
 			color: "text-ayu-regexp",
-			cnUrl: "https://example.com/project4/cn",
-			enUrl: "https://example.com/project4/en",
+			cnUrl: "https://eaa9gdwuyv7.feishu.cn/wiki/YeOSwsG7giLuQxkcDFscUXVZn2f",
+			enUrl: "https://refold.la/simplified/",
 		},
 		{
 			icon: <GitMerge className="w-5 h-5" />,
