@@ -35,12 +35,12 @@ export default {
           desc: "Sidebar assistant dialog reads conversation records in real-time, provides suggestions in real-time, just like having a real tutor"
         },
         beautifulThemes: {
-          title: "Lunatranslator - Extract and translate text from games",
-          desc: "Super useful software developed by HIllya51, can extract text from Galgame and open it with web pages, pair with Lingkuma for immersive learning!"
+          title: "Ohmytext - OCR Text Overlay",
+          desc: "OCR text overlay layer, transfers game text to web pages, and uses browser plugins to query and operate on text"
         },
         visualGit: {
-       title: "Coming Soon",
-          desc: "Coming Soon"
+          title: "Lunatranslator - Extract and translate text from games",
+          desc: "Super useful software developed by HIllya51, can extract text from Galgame and open it with web pages, pair with Lingkuma for immersive learning!"
         },
         mergeTool: {
           title: "Coming Soon",

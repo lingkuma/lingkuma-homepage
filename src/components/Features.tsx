@@ -34,8 +34,8 @@ export function Features() {
 			description: t("features.items.beautifulThemes.desc"),
 			image: "/feature-git.png",
 			color: "text-ayu-func",
-			homepageUrl: "https://docs.lunatranslator.org/",
-			githubUrl: "https://github.com/HIllya51/LunaTranslator",
+			homepageUrl: "https://github.com/lingkuma/ohmytext",
+			githubUrl: "https://github.com/lingkuma/ohmytext",
 		},
 		{
 			icon: <Layers className="w-5 h-5" />,
@@ -43,8 +43,8 @@ export function Features() {
 			description: t("features.items.visualGit.desc"),
 			image: "/feature-agents.png",
 			color: "text-ayu-regexp",
-			cnUrl: "https://eaa9gdwuyv7.feishu.cn/wiki/YeOSwsG7giLuQxkcDFscUXVZn2f",
-			enUrl: "https://refold.la/simplified/",
+			homepageUrl: "https://docs.lunatranslator.org/",
+			githubUrl: "https://github.com/HIllya51/LunaTranslator",
 		},
 		{
 			icon: <GitMerge className="w-5 h-5" />,

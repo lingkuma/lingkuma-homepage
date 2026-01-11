@@ -35,12 +35,12 @@ export default {
           desc: "侧栏辅助对话框实时读取对话记录，实时给出建议，就像请了真的助教一样"
         },
         beautifulThemes: {
-          title: "Lunatranslator - 将游戏中的文本获取出来并翻译",
-          desc: "HIllya51开发的超好用软件，可以将Galgame（旮旯给木）的文本获取出来并用网页打开，搭配Lingkuma沉浸学习吧！"
+          title: "Ohmytext - OCR文本覆盖层",
+          desc: "OCR文本覆盖层，将游戏文本转移到网页中，利用浏览器的插件对文本进行查询等操作"
         },
         visualGit: {
-          title: "开发中... ",
-          desc: "开发中... "  
+          title: "Lunatranslator - 将游戏中的文本获取出来并翻译",
+          desc: "HIllya51开发的超好用软件，可以将Galgame（旮旯给木）的文本获取出来并用网页打开，搭配Lingkuma沉浸学习吧！"  
         },
         mergeTool: {
           title: "开发中... ",
