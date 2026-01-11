@@ -178,7 +178,7 @@ export function Features() {
 										{("cnUrl" in feature && "enUrl" in feature) ? (
 											<>
 												<a
-													href={feature.cnUrl}
+													href={feature.cnUrl as string}
 													target="_blank"
 													rel="noopener noreferrer"
 													className={clsx(
@@ -193,7 +193,7 @@ export function Features() {
 													中文
 												</a>
 												<a
-													href={feature.enUrl}
+													href={feature.enUrl as string}
 													target="_blank"
 													rel="noopener noreferrer"
 													className={clsx(
