@@ -302,12 +302,43 @@ export function Features() {
 										</div>
 									</div>
 								</div>
+
+								{/* 手机模式下：图片显示在选中项目底部 */}
+								{activeFeature === index && (
+									<motion.div
+										initial={{ opacity: 0, height: 0 }}
+										animate={{ opacity: 1, height: "auto" }}
+										exit={{ opacity: 0, height: 0 }}
+										transition={{ duration: 0.3, ease: "easeInOut" }}
+										className="lg:hidden mt-4 overflow-hidden"
+									>
+										<div className="relative rounded-2xl border border-ayu-line bg-ayu-panel shadow-lg overflow-hidden">
+											{/* Window Controls Decoration */}
+											<div className="relative h-8 bg-ayu-panel border-b border-ayu-line z-20 flex items-center px-3 gap-1.5">
+												<div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
+												<div className="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
+												<div className="w-2.5 h-2.5 rounded-full bg-green-400"></div>
+											</div>
+											<div className="relative bg-ayu-bg/10 aspect-[16/10]">
+												<motion.img
+													key={activeFeature}
+													src={features[activeFeature].image}
+													alt={features[activeFeature].title}
+													initial={{ opacity: 0 }}
+													animate={{ opacity: 1 }}
+													transition={{ duration: 0.4, ease: "easeInOut" }}
+													className="w-full h-full object-cover object-top rounded-b-xl border border-ayu-line/30 shadow-sm absolute inset-0"
+												/>
+											</div>
+										</div>
+									</motion.div>
+								)}
 							</button>
 						))}
 					</div>
 
-					{/* Right Side: Image Preview */}
-					<div className="w-full lg:w-2/3 lg:sticky lg:top-24 h-fit">
+					{/* Right Side: Image Preview - 仅桌面模式显示 */}
+					<div className="hidden lg:block lg:w-2/3 lg:sticky lg:top-24 h-fit">
 						<div className="relative rounded-3xl border border-ayu-line bg-ayu-panel shadow-2xl overflow-hidden perspective-1000">
 							<div className="absolute inset-0 bg-ayu-bg/50"></div>
 
