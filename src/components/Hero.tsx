@@ -2,12 +2,92 @@ import { Button } from './Button';
 import { MessageCircle, Send, MessageSquare } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import { useRef, useEffect, useState } from 'react';
 
 export function Hero() {
   const { t } = useTranslation();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerHeight, setContainerHeight] = useState(0);
+
+  useEffect(() => {
+    const updateHeight = () => {
+      if (containerRef.current) {
+        setContainerHeight(containerRef.current.offsetHeight);
+      }
+    };
+    
+    updateHeight();
+    
+    const resizeObserver = new ResizeObserver(updateHeight);
+    if (containerRef.current) {
+      resizeObserver.observe(containerRef.current);
+    }
+    
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, []);
 
   return (
-    <section className="relative pt-40 pb-20 overflow-hidden bg-grid-pattern [background-size:24px_24px]">
+    <section ref={containerRef} className="relative pt-40 pb-20 overflow-hidden">
+      {/* 网格斜向滚动背景 */}
+      <div className="absolute inset-0 opacity-5 overflow-hidden">
+        <motion.div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, currentColor 1px, transparent 1px),
+              linear-gradient(to bottom, currentColor 1px, transparent 1px)
+            `,
+            backgroundSize: '24px 24px',
+            backgroundColor: 'transparent',
+            width: '200%',
+            height: '200%',
+          }}
+          animate={{
+            x: [0, -24, -48],
+            y: [0, -24, -48],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+        {/* 小鱼元素 - 模拟真实游动 */}
+        {Array.from({ length: 20 }).map((_, i) => {
+          const startX = Math.random() * 90 + 5;
+          const delay = Math.random() * 4;
+          const duration = 3 + Math.random() * 2;
+          const fishSize = 1.5 + Math.random() * 1;
+          const xOffset = -20 - Math.random() * 30;
+          const swimDistance = (containerHeight || 500) + 50;
+          return (
+            <motion.div
+              key={i}
+              className="absolute"
+              style={{
+                left: `${startX}%`,
+                bottom: '-10%',
+                fontSize: `${fishSize}rem`,
+              }}
+              animate={{
+                y: [0, -swimDistance],
+                x: [0, xOffset],
+              }}
+              transition={{
+                duration: duration,
+                delay: delay,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            >
+              🐟
+            </motion.div>
+          );
+        })}
+      </div>
+      
       <div className="absolute inset-0 bg-gradient-to-b from-ayu-bg/80 via-ayu-bg/50 to-ayu-bg/80 pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

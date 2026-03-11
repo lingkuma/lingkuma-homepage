@@ -199,24 +199,28 @@ export function Features() {
 													ease: "linear",
 												}}
 											/>
-											{/* 小鱼元素 - 从底部生成向上游动 */}
+											{/* 小鱼元素 - 模拟真实游动 */}
 											{Array.from({ length: 12 }).map((_, i) => {
-												const startX = 10 + (i * 7.5) % 80;
-												const delay = (i * 0.25) % 3;
+												const startX = Math.random() * 80 + 10;
+												const delay = Math.random() * 3;
+												const duration = 2.5 + Math.random() * 1.5;
+												const fishSize = 0.8 + Math.random() * 0.6;
+												const xOffset = -15 - Math.random() * 20;
 												return (
 													<motion.div
 														key={i}
-														className="absolute text-base"
+														className="absolute"
 														style={{
 															left: `${startX}%`,
 															bottom: '-10%',
+															fontSize: `${fishSize}rem`,
 														}}
 														animate={{
 															y: [0, -150],
-															x: [0, -30],
+															x: [0, xOffset],
 														}}
 														transition={{
-															duration: 3,
+															duration: duration,
 															delay: delay,
 															repeat: Infinity,
 															ease: "linear",
