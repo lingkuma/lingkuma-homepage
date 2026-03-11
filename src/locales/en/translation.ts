@@ -79,7 +79,7 @@ export default {
           title: "Refold - Roadmap for Learning New Language",
           desc: "How to learn a new language? A complete guide to language learning from scratch.",
           tag: "Learning Method",
-          url: "https://refold.la/"
+          url: "https://refold.la/simplified/"
         },
         immersion: {
           title: "The Art of Immersion Learning",
