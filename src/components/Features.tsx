@@ -119,7 +119,7 @@ export function Features() {
 				id="features"
 				className="pt-24 pb-12 bg-ayu-bg relative border-t border-ayu-line"
 			>
-				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 					<div className="mb-20 text-center">
 						<h2 className="text-4xl md:text-5xl font-bold text-ayu-fg mb-6 tracking-tight">
 							{t("features.title")}
@@ -174,74 +174,128 @@ export function Features() {
 									<p className="text-sm text-ayu-fg/60 leading-relaxed pl-12 mb-3">
 										{feature.description}
 									</p>
-									<div className="flex gap-2 pl-12">
-										{("cnUrl" in feature && "enUrl" in feature) ? (
-											<>
-												<a
-													href={feature.cnUrl as string}
-													target="_blank"
-													rel="noopener noreferrer"
-													className={clsx(
-														"inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all",
-														activeFeature === index
-															? "bg-ayu-bg text-ayu-fg hover:bg-ayu-fg/10"
-															: "bg-ayu-panel/50 text-ayu-fg/70 hover:bg-ayu-panel hover:text-ayu-fg"
-													)}
-													onClick={(e) => e.stopPropagation()}
-												>
-													<Globe className="w-3.5 h-3.5" />
-													中文
-												</a>
-												<a
-													href={feature.enUrl as string}
-													target="_blank"
-													rel="noopener noreferrer"
-													className={clsx(
-														"inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all",
-														activeFeature === index
-															? "bg-ayu-bg text-ayu-fg hover:bg-ayu-fg/10"
-															: "bg-ayu-panel/50 text-ayu-fg/70 hover:bg-ayu-panel hover:text-ayu-fg"
-													)}
-													onClick={(e) => e.stopPropagation()}
-												>
-													<Globe className="w-3.5 h-3.5" />
-													English
-												</a>
-											</>
-										) : (
-											<>
-												<a
-													href={feature.homepageUrl}
-													target="_blank"
-													rel="noopener noreferrer"
-													className={clsx(
-														"inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all",
-														activeFeature === index
-															? "bg-ayu-bg text-ayu-fg hover:bg-ayu-fg/10"
-															: "bg-ayu-panel/50 text-ayu-fg/70 hover:bg-ayu-panel hover:text-ayu-fg"
-													)}
-													onClick={(e) => e.stopPropagation()}
-												>
-													<Globe className="w-3.5 h-3.5" />
-													主页
-												</a>
-												<a
-													href={feature.githubUrl}
-													target="_blank"
-													rel="noopener noreferrer"
-													className={clsx(
-														"inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all",
-														activeFeature === index
-															? "bg-ayu-bg text-ayu-fg hover:bg-ayu-fg/10"
-															: "bg-ayu-panel/50 text-ayu-fg/70 hover:bg-ayu-panel hover:text-ayu-fg"
-													)}
-													onClick={(e) => e.stopPropagation()}
-												>
-													<Github className="w-3.5 h-3.5" />
-													GitHub
-												</a>
-											</>
-										)}
+									<div className="relative rounded-xl overflow-hidden">
+										{/* 网格斜向滚动背景 */}
+										<div className="absolute inset-0 opacity-10 overflow-hidden">
+											<motion.div
+												className="absolute inset-0"
+												style={{
+													backgroundImage: `
+														linear-gradient(to right, currentColor 1px, transparent 1px),
+														linear-gradient(to bottom, currentColor 1px, transparent 1px)
+													`,
+													backgroundSize: '20px 20px',
+													backgroundColor: 'transparent',
+													width: '200%',
+													height: '200%',
+												}}
+												animate={{
+													x: [0, -20, -40],
+													y: [0, -20, -40],
+												}}
+												transition={{
+													duration: 3,
+													repeat: Infinity,
+													ease: "linear",
+												}}
+											/>
+											{/* 小鱼元素 - 从底部生成向上游动 */}
+											{Array.from({ length: 12 }).map((_, i) => {
+												const startX = 10 + (i * 7.5) % 80;
+												const delay = (i * 0.25) % 3;
+												return (
+													<motion.div
+														key={i}
+														className="absolute text-base"
+														style={{
+															left: `${startX}%`,
+															bottom: '-10%',
+														}}
+														animate={{
+															y: [0, -150],
+															x: [0, -30],
+														}}
+														transition={{
+															duration: 3,
+															delay: delay,
+															repeat: Infinity,
+															ease: "linear",
+														}}
+													>
+														🐟
+													</motion.div>
+												);
+											})}
+										</div>
+										<div className="flex gap-2 pl-12 relative z-10">
+											{("cnUrl" in feature && "enUrl" in feature) ? (
+												<>
+													<a
+														href={feature.cnUrl as string}
+														target="_blank"
+														rel="noopener noreferrer"
+														className={clsx(
+															"inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all",
+															activeFeature === index
+																? "bg-ayu-bg text-ayu-fg hover:bg-ayu-fg/10"
+																: "bg-ayu-panel/50 text-ayu-fg/70 hover:bg-ayu-panel hover:text-ayu-fg"
+														)}
+														onClick={(e) => e.stopPropagation()}
+													>
+														<Globe className="w-3.5 h-3.5" />
+														中文
+													</a>
+													<a
+														href={feature.enUrl as string}
+														target="_blank"
+														rel="noopener noreferrer"
+														className={clsx(
+															"inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all",
+															activeFeature === index
+																? "bg-ayu-bg text-ayu-fg hover:bg-ayu-fg/10"
+																: "bg-ayu-panel/50 text-ayu-fg/70 hover:bg-ayu-panel hover:text-ayu-fg"
+														)}
+														onClick={(e) => e.stopPropagation()}
+													>
+														<Globe className="w-3.5 h-3.5" />
+														English
+													</a>
+												</>
+											) : (
+												<>
+													<a
+														href={feature.homepageUrl}
+														target="_blank"
+														rel="noopener noreferrer"
+														className={clsx(
+															"inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg transition-all shadow-sm hover:shadow-md",
+															activeFeature === index
+																? "bg-ayu-accent text-white hover:bg-ayu-accent/90"
+																: "bg-ayu-panel/80 text-ayu-fg hover:bg-ayu-panel hover:text-ayu-accent border border-ayu-line/50"
+														)}
+														onClick={(e) => e.stopPropagation()}
+													>
+														<Globe className="w-4 h-4" />
+														主页
+													</a>
+													<a
+														href={feature.githubUrl}
+														target="_blank"
+														rel="noopener noreferrer"
+														className={clsx(
+															"inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg transition-all shadow-sm hover:shadow-md",
+															activeFeature === index
+																? "bg-ayu-accent text-white hover:bg-ayu-accent/90"
+																: "bg-ayu-panel/80 text-ayu-fg hover:bg-ayu-panel hover:text-ayu-accent border border-ayu-line/50"
+														)}
+														onClick={(e) => e.stopPropagation()}
+													>
+														<Github className="w-4 h-4" />
+														GitHub
+													</a>
+												</>
+											)}
+										</div>
 									</div>
 								</div>
 							</button>
