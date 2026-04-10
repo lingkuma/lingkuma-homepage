@@ -2,6 +2,7 @@ import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Features } from './components/Features';
 import { Footer } from './components/Footer';
+import { SEO } from './components/SEO';
 import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
 import { clsx } from 'clsx';
@@ -95,6 +96,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-ayu-bg text-ayu-fg selection:bg-ayu-selection selection:text-ayu-selection-text font-sans antialiased transition-colors duration-300">
+      <SEO />
       <Navbar />
       
       <main>
