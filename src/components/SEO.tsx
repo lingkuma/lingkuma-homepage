@@ -11,11 +11,11 @@ const seoConfig = {
     ogDescription: '开发和分享更多开源软件，让学语言更简单，更高效。',
   },
   'en': {
-    title: 'Lingkuma - Powerful tools for language learning',
-    description: 'Lingkuma - Powerful tools for language learning. Develop and share open-source software to make language learning simpler and more efficient. Explore Lingkuma, SyncLingua, Ohmytext and more.',
-    keywords: 'Lingkuma, language learning, Japanese learning, open source, SyncLingua, Ohmytext, immersive learning',
-    ogTitle: 'Lingkuma - Powerful tools for language learning',
-    ogDescription: 'Develop and share open-source software to make language learning simpler and more efficient.',
+    title: 'Lingkuma - An open-source alternative to LingQ',
+    description: 'Lingkuma - An open-source alternative to LingQ, Powerful tools for language learning.  built to make language learning simpler and more efficient. Explore Lingkuma, SyncLingua, Ohmytext and more.',
+    keywords: 'Lingkuma, LingQ, language learning, Japanese learning, open source, SyncLingua, Ohmytext, immersive learning',
+    ogTitle: 'Lingkuma - An open-source alternative to LingQ',
+    ogDescription: 'Lingkuma - An open-source alternative to LingQ, built to make language learning simpler and more efficient.',
   }
 };
 
